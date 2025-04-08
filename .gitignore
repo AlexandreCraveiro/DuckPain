@@ -1,0 +1,23 @@
+# Unity folders to ignore
+[Ll]ibrary/
+[Tt]emp/
+[Bb]uild/
+[Bb]uilds/
+[Oo]bj/
+[Mm]emoryCaptures/
+
+# OS and IDE files to ignore
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.user
+
+# Auto-generated Unity packages
+*.unitypackage
+
+# Logs and crash dumps
+*.log
+sysinfo.txt
