@@ -4643,13 +4643,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.056023173, y: -0.08056647, z: 0.27148226, w: 0.9574277}
+  m_LocalRotation: {x: -0.31463242, y: 0.02945785, z: 0.28164843, w: 0.90598726}
   m_LocalPosition: {x: 0.12982878, y: 9, z: -81.824875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 8.686, y: -7.198, z: 31.114}
+  m_LocalEulerAnglesHint: {x: -35.923, y: -8.798, z: 37.395}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6200,6 +6200,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2037325897}
     m_Modifications:
+    - target: {fileID: 1647738176804171739, guid: db3cc535331127d44a63e94c61c998ed, type: 3}
+      propertyPath: m_Range
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1661999709570405944, guid: db3cc535331127d44a63e94c61c998ed, type: 3}
       propertyPath: m_Name
       value: streetlight (11)
