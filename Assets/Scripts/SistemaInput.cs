@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class SistemaInput : MonoBehaviour
 {
     public InputSystem_Actions inputActions;
-    public static SistemaInput instance; //Singleton, só existe uma vez no projeto
+    public static SistemaInput instance; //Singleton, sï¿½ existe uma vez no projeto
     //guardar os dados de input
     public float EixoHorizontal;  //esquerda e direita
     public float EixoVertical;  //cima e baixo
