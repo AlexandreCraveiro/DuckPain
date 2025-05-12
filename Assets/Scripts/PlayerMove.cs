@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
     public float VelocidadeRodar = 30;
     public float VelocidadeSalto = -2;
 
-    float _inputRodar; //unico que não é publico porque nao precisa de animação
+    float _inputRodar; //unico que nï¿½o ï¿½ publico porque nao precisa de animaï¿½ï¿½o
     public float _inputAndar; 
     public float _movimentoLateral;
     public bool IsGrounded;
@@ -24,7 +24,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //rotação
+        //rotaï¿½ï¿½o
         _inputRodar = SistemaInput.instance.DeltaRatoX;
         if (_inputRodar != 0)
         {
@@ -34,8 +34,9 @@ public class PlayerMove : MonoBehaviour
         _inputAndar = SistemaInput.instance.EixoVertical;
         _movimentoLateral = SistemaInput.instance.EixoHorizontal;
 
-        //movimento lateral
-        if (_inputAndar == 0 && _movimentoLateral != 0)
+        //movimento lateral 
+        // para bloquear o andar para o lado _inputAndar != 0 && 
+        if (_movimentoLateral != 0)
         {
             Vector3 vector3 = transform.right * _movimentoLateral * VelocidadeAndar * Time.deltaTime;
             controller.Move(vector3);
@@ -65,5 +66,6 @@ public class PlayerMove : MonoBehaviour
         }
         controller.Move(_velocidade * Time.deltaTime);
         IsGrounded = controller.isGrounded;
+
     }
 }
