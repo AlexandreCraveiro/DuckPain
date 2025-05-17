@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.VFX;
+
 
 public class CarController : MonoBehaviour
 {
     public float motorForce = 100f;
     public float brakeForce = 1000f;
     public float maxSteerAngle = 30f;
+
+    public VisualEffect EfeitoRodas;
 
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
@@ -44,6 +48,12 @@ public class CarController : MonoBehaviour
 
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
+
+        if (EfeitoRodas != null)
+    {
+        bool ativar = Mathf.Abs(verticalInput) > 0.1f || isBraking;
+        EfeitoRodas.SetBool("Emitir", ativar);
+    }
     }
     private void ApplyBraking()
     {
@@ -76,4 +86,5 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
+
 }
