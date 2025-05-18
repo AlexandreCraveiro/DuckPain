@@ -8,6 +8,12 @@ public class CarController : MonoBehaviour
     public float brakeForce = 1000f;
     public float maxSteerAngle = 30f;
 
+    private bool arrancou = false;
+    private float tempoArranque = 0f;
+    public float duracaoEfeitoArranque = 3f;
+
+    private bool podeAtivarArranque = true;
+
     public VisualEffect EfeitoRodas;
 
     public VisualEffect FumoCarrinha;
@@ -40,12 +46,49 @@ public class CarController : MonoBehaviour
 
         if (!jogadorDentro)
         {
-            FumoCarrinha.SetBool("Emitir", false);
+            if (FumoCarrinha != null) FumoCarrinha.SetBool("Emitir", false);
+            if (EfeitoRodas != null) EfeitoRodas.SetBool("Emitir", false);
             return;
         }
 
-        bool ativarFumo = Mathf.Abs(verticalInput) > 0.1f;
-        FumoCarrinha.SetBool("Emitir", ativarFumo);
+        if (FumoCarrinha != null)
+        {
+            bool ativarFumo = Mathf.Abs(verticalInput) > 0.1f;
+            FumoCarrinha.SetBool("Emitir", ativarFumo);
+        }
+
+        float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
+
+        // Se o carro estiver praticamente parado, permite novo arranque
+        if (velocidade < 0.1f)
+        {
+            podeAtivarArranque = true;
+            arrancou = false; // opcional: reforça o reset
+        }
+
+        // Ativa o efeito apenas ao arrancar do zero
+        if (podeAtivarArranque && velocidade > 0.5f && Mathf.Abs(verticalInput) > 0.1f)
+        {
+            arrancou = true;
+            tempoArranque = duracaoEfeitoArranque;
+            podeAtivarArranque = false;
+
+            if (EfeitoRodas != null)
+                EfeitoRodas.SetBool("Emitir", true);
+        }
+
+        // Desliga o efeito após os 2 segundos
+        if (arrancou)
+        {
+            tempoArranque -= Time.deltaTime;
+            if (tempoArranque <= 0f)
+            {
+                arrancou = false;
+                if (EfeitoRodas != null)
+                    EfeitoRodas.SetBool("Emitir", false);
+            }
+        }
+
     }
 
     private void GetInput()
