@@ -10,6 +10,9 @@ public class CarController : MonoBehaviour
 
     public VisualEffect EfeitoRodas;
 
+    public VisualEffect FumoCarrinha;
+
+
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
     public WheelCollider rearLeftWheelCollider;
@@ -25,13 +28,24 @@ public class CarController : MonoBehaviour
     private float currentSteerAngle;
     private float currentBrakeForce;
     private bool isBraking;
+    private bool jogadorDentro = false;
 
     private void Update()
     {
+
         GetInput();
         HandleMotor();
         HandleSteering();
         UpdateWheels();
+
+        if (!jogadorDentro)
+        {
+            FumoCarrinha.SetBool("Emitir", false);
+            return;
+        }
+
+        bool ativarFumo = Mathf.Abs(verticalInput) > 0.1f;
+        FumoCarrinha.SetBool("Emitir", ativarFumo);
     }
 
     private void GetInput()
@@ -41,6 +55,22 @@ public class CarController : MonoBehaviour
         isBraking = Input.GetKey(KeyCode.Space);
     }
 
+
+
+    public void JogadorEntrouNoCarro()
+    {
+        jogadorDentro = true;
+
+    }
+
+    public void JogadorSaiuDoCarro()
+    {
+        jogadorDentro = false;
+        FumoCarrinha.SetBool("Emitir", false); // garante que desliga ao sair
+    }
+
+
+
     private void HandleMotor()
     {
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
@@ -49,11 +79,8 @@ public class CarController : MonoBehaviour
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
 
-        if (EfeitoRodas != null)
-    {
-        bool ativar = Mathf.Abs(verticalInput) > 0.1f || isBraking;
-        EfeitoRodas.SetBool("Emitir", ativar);
-    }
+
+
     }
     private void ApplyBraking()
     {

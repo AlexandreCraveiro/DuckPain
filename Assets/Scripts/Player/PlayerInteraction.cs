@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public GameObject playerModel; // o modelo visível da personagem
-    public GameObject car;         // referência ao carro
-    public Transform seat;         // posição onde o jogador "entra"
-    public CarController carController; // script de condução
+    public GameObject playerModel; // o modelo visï¿½vel da personagem
+    public GameObject car;         // referï¿½ncia ao carro
+    public Transform seat;         // posiï¿½ï¿½o onde o jogador "entra"
+    public CarController carController; // script de conduï¿½ï¿½o
     private bool canEnter = false;
     public CinemachineThirdPersonAim cinemachineThirdPersonAim;
     public Transform CarCameraTarget;
@@ -47,6 +47,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void EnterCar()
     {
+
+
         // Esconde o modelo da personagem
         playerModel.SetActive(false);
 
@@ -54,8 +56,9 @@ public class PlayerInteraction : MonoBehaviour
         transform.position = seat.position;
         transform.rotation = seat.rotation;
 
-        // Ativa o script de condução
+        // Ativa o script de conduï¿½ï¿½o
         carController.enabled = true;
+        carController.JogadorEntrouNoCarro();
 
         // Desativa o controlo da personagem
         playerModel.GetComponent<PlayerMove>().enabled = false;
@@ -64,17 +67,30 @@ public class PlayerInteraction : MonoBehaviour
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = CarCameraTarget;
 
         isInCar = true;
+        
+        carController.JogadorEntrouNoCarro();
+        carController.FumoCarrinha.SetBool("Emitir", true);
     }
 
     private void ExitCar()
     {
+
+        
+
         Debug.Log("Saiu do carro");
         playerModel.transform.position = posicaosaida.position;
         playerModel.SetActive(true);
         isInCar = false;
+
+        carController.JogadorSaiuDoCarro();
+
         carController.enabled = false;
         playerModel.GetComponent<PlayerMove>().enabled = true;
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = playerCameraTarget;
+
+    
+
+
     }
 }
 
