@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class NPCCarController : MonoBehaviour
 {
+    public bool inimigo = false;
+    public Transform jogador;
+    public float distanciaParaPerseguir = 15f;
+
     public Transform[] pontos;
     public float motorForce = 1000f;
     public float breakForce = 1000f;
@@ -19,35 +23,41 @@ public class NPCCarController : MonoBehaviour
     public Transform rearRightWheelTransform;
 
     private int proximoPonto = 0;
+    private bool aPerseguir = false;
 
     void FixedUpdate()
     {
-        if (pontos.Length == 0) return;
-        float distancia = Vector3.Distance(transform.position, pontos[proximoPonto].position);
-        Vector3 destino = pontos[proximoPonto].position;
+        if (inimigo && jogador != null)
+        {
+            float distanciaJogador = Vector3.Distance(transform.position, jogador.position);
+            aPerseguir = distanciaJogador < distanciaParaPerseguir;
+        }
+
+        Vector3 destino = aPerseguir ? jogador.position : pontos[proximoPonto].position;
+
+        float distancia = Vector3.Distance(transform.position, destino);
         Vector3 localTarget = transform.InverseTransformPoint(destino);
         float steer = Mathf.Clamp(localTarget.x / localTarget.magnitude, -1f, 1f);
         float motor = distancia > stoppingDistance * 3 ? 1f : 0.1f;
         float brake = 1 - motor;
-        // Debug.Log($"{distancia} Steer: {steer}, Motor: {motor}");
+
         frontLeftWheel.steerAngle = steer * maxSteerAngle;
         frontRightWheel.steerAngle = steer * maxSteerAngle;
 
         frontLeftWheel.motorTorque = motor * motorForce;
         frontRightWheel.motorTorque = motor * motorForce;
+
         frontLeftWheel.brakeTorque = brake * breakForce;
-        frontLeftWheel.brakeTorque = brake * breakForce;
-        frontLeftWheel.brakeTorque = brake * breakForce;
-        frontLeftWheel.brakeTorque = brake * breakForce;
+        frontRightWheel.brakeTorque = brake * breakForce;
+        rearLeftWheel.brakeTorque = brake * breakForce;
+        rearRightWheel.brakeTorque = brake * breakForce;
 
         UpdateWheelVisuals();
 
-        if (distancia< stoppingDistance)
+        if (!aPerseguir && distancia < stoppingDistance)
         {
             proximoPonto++;
             if (proximoPonto >= pontos.Length) proximoPonto = 0;
-            //transform.LookAt(pontos[proximoPonto]);
-
         }
     }
 
@@ -66,3 +76,4 @@ public class NPCCarController : MonoBehaviour
         visual.rotation = rot;
     }
 }
+

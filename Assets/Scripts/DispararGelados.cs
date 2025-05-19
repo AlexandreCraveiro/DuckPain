@@ -16,16 +16,14 @@ public class DispararGelados : MonoBehaviour
 
     public bool jogadorDentroDoCarro = false;
 
-    public PlayerInteraction playerInteraction;
+
+
+
 
     void Start()
     {
-        if (playerInteraction == null)
-        {
-            playerInteraction = FindObjectOfType<PlayerInteraction>();
-            if (playerInteraction == null)
-                Debug.LogError("PlayerInteraction não encontrado para disparar gelado!");
-        }
+        
+        
     }
 
     void Update()
@@ -37,27 +35,21 @@ public class DispararGelados : MonoBehaviour
     }
 
     void Disparar()
+{
+    if (Time.time < proximoTiro) return;
+    proximoTiro = Time.time + tempoEntreTiros;
+
+    Transform spawnPoint = jogadorDentroDoCarro ? pontoDisparoCarrinha : pontoDisparoPlayer;
+
+    GameObject gelado = Instantiate(geladoPrefab, spawnPoint.position, spawnPoint.rotation);
+    Rigidbody rb = gelado.GetComponent<Rigidbody>();
+    if (rb != null)
     {
-        if (Time.time < proximoTiro) return;
-        proximoTiro = Time.time + tempoEntreTiros;
-
-        if (playerInteraction == null)
-        {
-            Debug.LogWarning("PlayerInteraction é null, não pode disparar");
-            return;
-        }
-
-
-        Transform spawnPoint = playerInteraction.isInCar ? pontoDisparoCarrinha : pontoDisparoPlayer;
-
-        GameObject gelado = Instantiate(geladoPrefab, spawnPoint.position, spawnPoint.rotation);
-        Rigidbody rb = gelado.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.AddForce(spawnPoint.forward * forcaDisparo);
-        }
-        
+        rb.AddForce(spawnPoint.forward * forcaDisparo);
     }
+}
+
+
 
 
 
