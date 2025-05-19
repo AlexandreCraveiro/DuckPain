@@ -78,14 +78,14 @@ public class Catch : MonoBehaviour
                 circleVisual.SetActive(false);
                 objectTimers.Clear(); // <- limpa os timers
 
-                foreach (GameObject obj in grabbedObjects)
-                {
-                    NPC kid = obj.GetComponent<NPC>();
-                    if (kid != null)
-                    {
-                        kid.Velocidade = 1;
-                    }
-                }
+                // foreach (GameObject obj in grabbedObjects)
+                // {
+                //     NPC kid = obj.GetComponent<NPC>();
+                //     if (kid != null)
+                //     {
+                //         kid.Velocidade = 1;
+                //     }
+                // }
             }
         }
         
@@ -97,45 +97,45 @@ public class Catch : MonoBehaviour
 
             if (!objectOffsets.ContainsKey(obj))
             {
-                Vector2 offset2D = Random.insideUnitCircle * 0.5f;
-                Vector3 offset = new Vector3(offset2D.x, 0f, offset2D.y);
+                Vector2 offset2D = Random.insideUnitCircle * 0.9f;
+                Vector3 offset = new Vector3(offset2D.x, 1f, offset2D.y);
                 objectOffsets[obj] = offset;
             }
 
             Vector3 targetPosition = center + objectOffsets[obj];
-            obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, 0.1f);
+            obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, 0.02f);
         }
 
         
 
 
         // Verifica se algum objeto agarrado se afastou demasiado do círculo
-        List<GameObject> releasedObjects = new List<GameObject>();
+        // List<GameObject> releasedObjects = new List<GameObject>();
 
-        foreach (GameObject obj in grabbedObjects)
-        {
-            if (obj == null) continue;
+        // foreach (GameObject obj in grabbedObjects)
+        // {
+        //     if (obj == null) continue;
 
-            float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
-            if (distance > maxRadius)
-            {
-                // Solta o objeto
-                NPC kid = obj.GetComponent<NPC>();
-                if (kid != null)
-                {
-                    kid.Velocidade = 1;
-                }
+        //     float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
+        //     if (distance > maxRadius)
+        //     {
+        //         // Solta o objeto
+        //         NPC kid = obj.GetComponent<NPC>();
+        //         if (kid != null)
+        //         {
+        //             kid.Velocidade = 1;
+        //         }
 
-                releasedObjects.Add(obj);
-            }
-        }
+        //         releasedObjects.Add(obj);
+        //     }
+        // }
 
-        // Remove os que foram libertos
-        foreach (GameObject obj in releasedObjects)
-        {
-            grabbedObjects.Remove(obj);
-            objectOffsets.Remove(obj); // limpa offset
-        }
+        // // Remove os que foram libertos
+        // foreach (GameObject obj in releasedObjects)
+        // {
+        //     grabbedObjects.Remove(obj);
+        //     objectOffsets.Remove(obj); // limpa offset
+        // }
 
 
 
@@ -146,7 +146,7 @@ public class Catch : MonoBehaviour
         Vector3 center = circleVisual.transform.position;
         float radius = currentScale / 2f;
 
-        Debug.Log("Raio: " + radius);
+        // Debug.Log("Raio: " + radius);
 
         // Assume que os objetos a apanhar têm tag "Capturable"
         Collider[] hits = Physics.OverlapSphere(center, radius);
@@ -154,16 +154,16 @@ public class Catch : MonoBehaviour
         foreach (Collider hit in hits)
         {
             GameObject obj = hit.gameObject;
-            Debug.Log("Objeto: " + obj.name);
+            // Debug.Log("Objeto: " + obj.name);
             if (!obj.CompareTag("Capturable+") && !obj.CompareTag("Capturable-")) continue;
-            Debug.Log("Objeto dentro do raio: " + obj.name);
+            // Debug.Log("Objeto dentro do raio: " + obj.name);
 
             // Zera a velocidade se o objeto tiver o script Inimigo
             NPC kid = obj.GetComponent<NPC>();
             if (kid != null)
             {
                 kid.Velocidade = 0;
-                Debug.Log("Objeto parado: " + obj.name);
+                // Debug.Log("Objeto parado: " + obj.name);
             }
 
             if (!objectTimers.ContainsKey(obj))
@@ -184,16 +184,6 @@ public class Catch : MonoBehaviour
                 }
 
                 objectTimers.Remove(obj);
-                // if (obj.CompareTag("Capturable+"))
-                // { 
-                //     nrCorrect++;
-                //     capturedText.text = nrCorrect.ToString();
-                // }
-                // else
-                // {
-                //     nrWrong++;
-                //     capturedText.text = nrWrong.ToString();
-                // }
 
             }
         }
