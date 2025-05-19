@@ -72,7 +72,6 @@ public class PlayerInteraction : MonoBehaviour
 
         isInCar = true;
         
-        carController.JogadorEntrouNoCarro();
         carController.FumoCarrinha.SetBool("Emitir", true);
     }
 
