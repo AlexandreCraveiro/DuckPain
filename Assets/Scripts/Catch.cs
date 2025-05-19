@@ -133,8 +133,10 @@ public class Catch : MonoBehaviour
         List<GameObject> outsideObjects = new List<GameObject>();
         foreach (var pair in objectTimers)
         {
-            if (Vector3.Distance(pair.Key.transform.position, center) > radius) {
-                NPC kid = pair.Key.GetComponent<NPC>();
+            GameObject obj = pair.Key;
+            float distance = Vector3.Distance(obj.transform.position, center);
+            if (distance > radius) {
+                NPC kid = obj.GetComponent<NPC>();
                 if (kid != null) 
                 {
                     kid.Velocidade = 1;
@@ -142,8 +144,6 @@ public class Catch : MonoBehaviour
 
                 outsideObjects.Add(pair.Key);
             }
-
-
         }
 
         foreach (var obj in outsideObjects)
