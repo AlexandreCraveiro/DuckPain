@@ -29,7 +29,7 @@ public class NPCCarController : MonoBehaviour
         float steer = Mathf.Clamp(localTarget.x / localTarget.magnitude, -1f, 1f);
         float motor = distancia > stoppingDistance * 3 ? 1f : 0.1f;
         float brake = 1 - motor;
-        Debug.Log($"{distancia} Steer: {steer}, Motor: {motor}");
+        // Debug.Log($"{distancia} Steer: {steer}, Motor: {motor}");
         frontLeftWheel.steerAngle = steer * maxSteerAngle;
         frontRightWheel.steerAngle = steer * maxSteerAngle;
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class Catch : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Catch : MonoBehaviour
 
     private int nrCorrect = 0;
     private int nrWrong = 0;
+
+    public TextMeshProUGUI capturedText;
 
     private Dictionary<GameObject, float> objectTimers = new Dictionary<GameObject, float>();
 
@@ -79,19 +82,24 @@ public class Catch : MonoBehaviour
         Vector3 center = circleVisual.transform.position;
         float radius = circleVisual.transform.localScale.x / 2f;
 
+        Debug.Log("Raio: " + radius);
+
         // Assume que os objetos a apanhar têm tag "Capturable"
         Collider[] hits = Physics.OverlapSphere(center, radius);
 
         foreach (Collider hit in hits)
         {
             GameObject obj = hit.gameObject;
+            Debug.Log("Objeto: " + obj.name);
             if (!obj.CompareTag("Capturable+") && !obj.CompareTag("Capturable-")) continue;
+            Debug.Log("Objeto dentro do raio: " + obj.name);
 
             // Zera a velocidade se o objeto tiver o script Inimigo
             NPC kid = obj.GetComponent<NPC>();
             if (kid != null)
             {
                 kid.Velocidade = 0;
+                Debug.Log("Objeto parado: " + obj.name);
             }
 
             if (!objectTimers.ContainsKey(obj))
@@ -108,10 +116,12 @@ public class Catch : MonoBehaviour
                 if (obj.CompareTag("Capturable+"))
                 { 
                     nrCorrect++;
+                    capturedText.text = nrCorrect.ToString();
                 }
                 else
                 {
                     nrWrong++;
+                    capturedText.text = nrWrong.ToString();
                 }
 
                 Destroy(obj);
@@ -140,7 +150,5 @@ public class Catch : MonoBehaviour
             objectTimers.Remove(obj);
     }
 
-    public static int NrCorrect { get; private set; }
 
-    public int getNrWrong() { return nrWrong; }
 }
