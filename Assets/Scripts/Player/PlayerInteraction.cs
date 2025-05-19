@@ -14,6 +14,10 @@ public class PlayerInteraction : MonoBehaviour
     public bool isInCar = false;
     public Transform posicaosaida;
     public Transform playerCameraTarget;
+
+    
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))

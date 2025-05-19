@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
     private float currentBrakeForce;
     private bool isBraking;
     private bool jogadorDentro = false;
+    public DispararGelados dispararGelado;
 
     private void Update()
     {
@@ -103,13 +104,15 @@ public class CarController : MonoBehaviour
     public void JogadorEntrouNoCarro()
     {
         jogadorDentro = true;
-
+        if (dispararGelado != null)
+        dispararGelado.jogadorDentroDoCarro = true;
     }
 
     public void JogadorSaiuDoCarro()
     {
         jogadorDentro = false;
-        FumoCarrinha.SetBool("Emitir", false); // garante que desliga ao sair
+        FumoCarrinha.SetBool("Emitir", false); 
+        //dispararGelado.SaiuDoCarro();
     }
 
 
@@ -156,5 +159,7 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
+
+    
 
 }
