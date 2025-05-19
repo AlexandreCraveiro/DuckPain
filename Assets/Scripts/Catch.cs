@@ -22,6 +22,13 @@ public class Catch : MonoBehaviour
 
     private Dictionary<GameObject, float> objectTimers = new Dictionary<GameObject, float>();
 
+    // Para guardar os objetos que estão a ser levados pelo pato
+    private List<GameObject> grabbedObjects = new List<GameObject>();
+    // Para guarder os offsets dos objetos levados pelo pato
+    private Dictionary<GameObject, Vector3> objectOffsets = new Dictionary<GameObject, Vector3>();
+
+
+
     void Start()
     {
         if (circleVisual != null)
@@ -70,9 +77,66 @@ public class Catch : MonoBehaviour
                 circleVisual.transform.localScale = Vector3.zero; // <- garante escala 0
                 circleVisual.SetActive(false);
                 objectTimers.Clear(); // <- limpa os timers
+
+                foreach (GameObject obj in grabbedObjects)
+                {
+                    NPC kid = obj.GetComponent<NPC>();
+                    if (kid != null)
+                    {
+                        kid.Velocidade = 1;
+                    }
+                }
             }
         }
         
+        foreach (GameObject obj in grabbedObjects)
+        {
+            if (obj == null || !circleVisual.activeSelf) continue;
+
+            Vector3 center = circleVisual.transform.position;
+
+            if (!objectOffsets.ContainsKey(obj))
+            {
+                Vector2 offset2D = Random.insideUnitCircle * 0.5f;
+                Vector3 offset = new Vector3(offset2D.x, 0f, offset2D.y);
+                objectOffsets[obj] = offset;
+            }
+
+            Vector3 targetPosition = center + objectOffsets[obj];
+            obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, 0.1f);
+        }
+
+        
+
+
+        // Verifica se algum objeto agarrado se afastou demasiado do círculo
+        List<GameObject> releasedObjects = new List<GameObject>();
+
+        foreach (GameObject obj in grabbedObjects)
+        {
+            if (obj == null) continue;
+
+            float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
+            if (distance > maxRadius)
+            {
+                // Solta o objeto
+                NPC kid = obj.GetComponent<NPC>();
+                if (kid != null)
+                {
+                    kid.Velocidade = 1;
+                }
+
+                releasedObjects.Add(obj);
+            }
+        }
+
+        // Remove os que foram libertos
+        foreach (GameObject obj in releasedObjects)
+        {
+            grabbedObjects.Remove(obj);
+            objectOffsets.Remove(obj); // limpa offset
+        }
+
 
 
     }
@@ -80,7 +144,7 @@ public class Catch : MonoBehaviour
     void CheckObjectsInRange()
     {
         Vector3 center = circleVisual.transform.position;
-        float radius = circleVisual.transform.localScale.x / 2f;
+        float radius = currentScale / 2f;
 
         Debug.Log("Raio: " + radius);
 
@@ -110,22 +174,27 @@ public class Catch : MonoBehaviour
             // Se estiver tempo suficiente, apanha
             if (objectTimers[obj] >= catchTime)
             {
-                Debug.Log("Objeto apanhado: " + obj.name);
-                // Exemplo de ação: destruir
 
-                if (obj.CompareTag("Capturable+"))
-                { 
-                    nrCorrect++;
-                    capturedText.text = nrCorrect.ToString();
-                }
-                else
+                // Adiciona o objeto a ser levado pelo pato
+                grabbedObjects.Add(obj);
+
+                if (kid != null)
                 {
-                    nrWrong++;
-                    capturedText.text = nrWrong.ToString();
+                    kid.Velocidade = 0;
                 }
 
-                Destroy(obj);
                 objectTimers.Remove(obj);
+                // if (obj.CompareTag("Capturable+"))
+                // { 
+                //     nrCorrect++;
+                //     capturedText.text = nrCorrect.ToString();
+                // }
+                // else
+                // {
+                //     nrWrong++;
+                //     capturedText.text = nrWrong.ToString();
+                // }
+
             }
         }
 
