@@ -20,7 +20,7 @@ public class DispararGelados : MonoBehaviour
 
     void Start()
     {
-         if (playerInteraction == null)
+        if (playerInteraction == null)
         {
             playerInteraction = FindObjectOfType<PlayerInteraction>();
             if (playerInteraction == null)
@@ -47,15 +47,19 @@ public class DispararGelados : MonoBehaviour
             return;
         }
 
-        Transform spawnPoint = playerInteraction.isInCar ? geladoSpawnCarro : geladoSpawnPlayer;
+
+        Transform spawnPoint = playerInteraction.isInCar ? pontoDisparoCarrinha : pontoDisparoPlayer;
+
         GameObject gelado = Instantiate(geladoPrefab, spawnPoint.position, spawnPoint.rotation);
         Rigidbody rb = gelado.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.AddForce(spawnPoint.forward * forcaDisparo);
         }
-
+        
     }
+
+
 
     // Estes métodos são chamados pelo sistema externo
     public void EntrouNoCarro()
