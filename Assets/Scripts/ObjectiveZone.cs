@@ -20,7 +20,7 @@ public class ObjectiveZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("EnterVehicle")) {
-            CaptureManager manager = FindObjectOfType<CaptureManager>();
+            CaptureManager manager = FindFirstObjectByType<CaptureManager>();
             if (manager != null) {
                 string message = "Foram capturadas " + manager.getCorrectedCount().ToString() + " corretas e " + manager.getIncorrectedCount().ToString() + " incorretas.";
                 scoreCount = manager.getCorrectedCount();

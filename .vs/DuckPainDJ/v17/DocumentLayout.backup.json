@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npccarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npccarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\catch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\catch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npcanima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npcanima.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\catch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\catch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\npccarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npccarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -53,42 +53,42 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Catch.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Catch.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Catch.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Catch.cs",
               "RelativeToolTip": "Assets\\Scripts\\Catch.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAADUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-19T13:16:59.012Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "NPCCarController.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPCCarController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPCCarController.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPCCarController.cs",
               "RelativeToolTip": "Assets\\Scripts\\NPCCarController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAgwCgAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-18T11:30:22.766Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "PlayerInteraction.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\PlayerInteraction.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerInteraction.cs",
-              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\PlayerInteraction.cs*",
-              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerInteraction.cs*",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\PlayerInteraction.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerInteraction.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAwwCcAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-17T13:41:50.819Z",
@@ -132,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "NPCAnima.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPCAnima.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPCAnima.cs",
@@ -140,8 +140,7 @@
               "RelativeToolTip": "Assets\\Scripts\\NPCAnima.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T15:06:20.012Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-09T15:06:20.012Z"
             },
             {
               "$type": "Document",

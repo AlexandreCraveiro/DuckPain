@@ -2,44 +2,132 @@ using UnityEngine;
 
 public class NPCCarController : MonoBehaviour
 {
+    public enum EstadoNPC { Idle, Patrulha, Perseguir }
+    public EstadoNPC estadoAtual = EstadoNPC.Patrulha;
+
+    [Header("Comportamento")]
     public bool inimigo = false;
     public Transform jogador;
-    public float distanciaParaPerseguir = 15f;
+    public float distanciaVisao = 15f;
+    public float distanciaDesistir = 20f;
 
+    [Header("Patrulha")]
     public Transform[] pontos;
+    private int proximoPonto = 0;
+    public float pontoDeMudanca = 3f; // distância para mudar de ponto
+
+    [Header("Movimento")]
     public float motorForce = 1000f;
     public float breakForce = 1000f;
     public float maxSteerAngle = 30f;
-    public float stoppingDistance = 3f;
 
+    [Header("Wheel Colliders")]
     public WheelCollider frontLeftWheel;
     public WheelCollider frontRightWheel;
     public WheelCollider rearLeftWheel;
     public WheelCollider rearRightWheel;
 
+    [Header("Wheel Visuals")]
     public Transform frontLeftWheelTransform;
     public Transform frontRightWheelTransform;
     public Transform rearLeftWheelTransform;
     public Transform rearRightWheelTransform;
 
-    private int proximoPonto = 0;
-    private bool aPerseguir = false;
+    [Header("Idle")]
+    public float tempoIdle = 1.5f;
+    private float tempoAtual = 0f;
+
+    void Start()
+    {
+        tempoAtual = tempoIdle;
+    }
 
     void FixedUpdate()
     {
         if (inimigo && jogador != null)
         {
             float distanciaJogador = Vector3.Distance(transform.position, jogador.position);
-            aPerseguir = distanciaJogador < distanciaParaPerseguir;
+
+            if (estadoAtual != EstadoNPC.Perseguir && distanciaJogador <= distanciaVisao)
+            {
+                estadoAtual = EstadoNPC.Perseguir;
+            }
+            else if (estadoAtual == EstadoNPC.Perseguir && distanciaJogador > distanciaDesistir)
+            {
+                estadoAtual = EstadoNPC.Idle;
+                tempoAtual = tempoIdle;
+            }
         }
 
-        Vector3 destino = aPerseguir ? jogador.position : pontos[proximoPonto].position;
+        switch (estadoAtual)
+        {
+            case EstadoNPC.Idle:
+                Estado_Idle();
+                break;
+            case EstadoNPC.Patrulha:
+                Estado_Patrulha();
+                break;
+            case EstadoNPC.Perseguir:
+                Estado_Perseguir();
+                break;
+        }
 
+        UpdateWheelVisuals();
+    }
+
+    void Estado_Idle()
+    {
+        PararCarro();
+
+        tempoAtual -= Time.fixedDeltaTime;
+        if (tempoAtual <= 0)
+        {
+            proximoPonto = EncontrarPontoMaisProximo();
+            estadoAtual = EstadoNPC.Patrulha;
+        }
+    }
+
+    void Estado_Patrulha()
+    {
+        if (pontos.Length == 0)
+        {
+            estadoAtual = EstadoNPC.Idle;
+            return;
+        }
+
+        Vector3 destino = pontos[proximoPonto].position;
         float distancia = Vector3.Distance(transform.position, destino);
+
+        ConduzirAte(destino, distancia);
+
+        if (distancia < pontoDeMudanca)
+        {
+            proximoPonto++;
+            if (proximoPonto >= pontos.Length) proximoPonto = 0;
+        }
+    }
+
+    void Estado_Perseguir()
+    {
+        if (jogador == null) return;
+
+        Vector3 destino = jogador.position;
+        float distancia = Vector3.Distance(transform.position, destino);
+
+        ConduzirAte(destino, distancia);
+    }
+
+    void ConduzirAte(Vector3 destino, float distancia)
+    {
         Vector3 localTarget = transform.InverseTransformPoint(destino);
         float steer = Mathf.Clamp(localTarget.x / localTarget.magnitude, -1f, 1f);
-        float motor = distancia > stoppingDistance * 3 ? 1f : 0.1f;
-        float brake = 1 - motor;
+        float angulo = Mathf.Abs(steer);
+        float motor = 1f;
+
+        if (angulo > 0.5f)
+            motor *= 0.5f;
+
+        float brake = 0f; // não travamos em patrulha
 
         frontLeftWheel.steerAngle = steer * maxSteerAngle;
         frontRightWheel.steerAngle = steer * maxSteerAngle;
@@ -47,18 +135,39 @@ public class NPCCarController : MonoBehaviour
         frontLeftWheel.motorTorque = motor * motorForce;
         frontRightWheel.motorTorque = motor * motorForce;
 
-        frontLeftWheel.brakeTorque = brake * breakForce;
-        frontRightWheel.brakeTorque = brake * breakForce;
-        rearLeftWheel.brakeTorque = brake * breakForce;
-        rearRightWheel.brakeTorque = brake * breakForce;
+        frontLeftWheel.brakeTorque = brake;
+        frontRightWheel.brakeTorque = brake;
+        rearLeftWheel.brakeTorque = brake;
+        rearRightWheel.brakeTorque = brake;
+    }
 
-        UpdateWheelVisuals();
+    void PararCarro()
+    {
+        frontLeftWheel.motorTorque = 0f;
+        frontRightWheel.motorTorque = 0f;
 
-        if (!aPerseguir && distancia < stoppingDistance)
+        frontLeftWheel.brakeTorque = breakForce;
+        frontRightWheel.brakeTorque = breakForce;
+        rearLeftWheel.brakeTorque = breakForce;
+        rearRightWheel.brakeTorque = breakForce;
+    }
+
+    int EncontrarPontoMaisProximo()
+    {
+        int maisProximo = 0;
+        float menorDistancia = Mathf.Infinity;
+
+        for (int i = 0; i < pontos.Length; i++)
         {
-            proximoPonto++;
-            if (proximoPonto >= pontos.Length) proximoPonto = 0;
+            float dist = Vector3.Distance(transform.position, pontos[i].position);
+            if (dist < menorDistancia)
+            {
+                menorDistancia = dist;
+                maisProximo = i;
+            }
         }
+
+        return maisProximo;
     }
 
     void UpdateWheelVisuals()
@@ -76,4 +185,3 @@ public class NPCCarController : MonoBehaviour
         visual.rotation = rot;
     }
 }
-
