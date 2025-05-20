@@ -78,14 +78,14 @@ public class Catch : MonoBehaviour
                 circleVisual.SetActive(false);
                 objectTimers.Clear(); // <- limpa os timers
 
-                // foreach (GameObject obj in grabbedObjects)
-                // {
-                //     NPC kid = obj.GetComponent<NPC>();
-                //     if (kid != null)
-                //     {
-                //         kid.Velocidade = 1;
-                //     }
-                // }
+                foreach (GameObject obj in grabbedObjects)
+                {
+                    NPC kid = obj.GetComponent<NPC>();
+                    if (kid != null)
+                    {
+                        kid.Velocidade = 1;
+                    }
+                }
             }
         }
         
@@ -102,40 +102,42 @@ public class Catch : MonoBehaviour
                 objectOffsets[obj] = offset;
             }
 
-            Vector3 targetPosition = center + objectOffsets[obj];
-            obj.transform.position = Vector3.Lerp(obj.transform.position, targetPosition, 0.02f);
+            Vector3 behindPosition = circleVisual.transform.position - circleVisual.transform.forward * 1.5f; // 1.5f = distância atrás
+            behindPosition.y = obj.transform.position.y; 
+
+            obj.transform.position = Vector3.Lerp(obj.transform.position, behindPosition, 0.1f);
         }
 
         
 
 
         // Verifica se algum objeto agarrado se afastou demasiado do círculo
-        // List<GameObject> releasedObjects = new List<GameObject>();
+        List<GameObject> releasedObjects = new List<GameObject>();
 
-        // foreach (GameObject obj in grabbedObjects)
-        // {
-        //     if (obj == null) continue;
+        foreach (GameObject obj in grabbedObjects)
+        {
+            if (obj == null) continue;
 
-        //     float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
-        //     if (distance > maxRadius)
-        //     {
-        //         // Solta o objeto
-        //         NPC kid = obj.GetComponent<NPC>();
-        //         if (kid != null)
-        //         {
-        //             kid.Velocidade = 1;
-        //         }
+            float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
+            if (distance > maxRadius)
+            {
+                // Solta o objeto
+                NPC kid = obj.GetComponent<NPC>();
+                if (kid != null)
+                {
+                    kid.Velocidade = 1;
+                }
 
-        //         releasedObjects.Add(obj);
-        //     }
-        // }
+                releasedObjects.Add(obj);
+            }
+        }
 
-        // // Remove os que foram libertos
-        // foreach (GameObject obj in releasedObjects)
-        // {
-        //     grabbedObjects.Remove(obj);
-        //     objectOffsets.Remove(obj); // limpa offset
-        // }
+        // Remove os que foram libertos
+        foreach (GameObject obj in releasedObjects)
+        {
+            grabbedObjects.Remove(obj);
+            objectOffsets.Remove(obj); // limpa offset
+        }
 
 
 
@@ -193,6 +195,7 @@ public class Catch : MonoBehaviour
         foreach (var pair in objectTimers)
         {
             GameObject obj = pair.Key;
+            if (obj != null) continue;
             float distance = Vector3.Distance(obj.transform.position, center);
             if (distance > radius) {
                 NPC kid = obj.GetComponent<NPC>();

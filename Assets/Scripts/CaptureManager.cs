@@ -34,6 +34,21 @@ public class CaptureManager : MonoBehaviour
             incorrectedCount++;
         }
 
+        Debug.Log("Objeto capturado: " + capturedObject.name);
         Destroy(capturedObject);
+    }
+
+    public void ResetCounters()
+    {
+        correctedCount = 0;
+        incorrectedCount = 0;
+    }
+
+    public int getCorrectedCount() {
+        return correctedCount;
+    }
+
+    public int getIncorrectedCount() {
+        return incorrectedCount;
     }
 }
