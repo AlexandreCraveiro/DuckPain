@@ -4,34 +4,24 @@ public class GeladoColetavel : MonoBehaviour
 {
     private DispararGelados dispararGelados;
 
-    
+    private bool podeSerRecolhido = true;
 
-    public void SetDispararGelados(DispararGelados disparar)
+    public void SetDispararGelados(DispararGelados script)
     {
-        dispararGelados = disparar;
+        dispararGelados = script;
     }
 
     private void OnTriggerEnter(Collider other)
-{
-    Debug.Log("Trigger do gelado ativado por: " + other.name + ", tag: " + other.tag);
-
-    if (other.CompareTag("Player"))
     {
-        Debug.Log("Gelado detectou o jogador!");
+        if (!podeSerRecolhido) return;
 
-        // Procura o DispararGelados no objeto ou nos pais
-        DispararGelados disparar = other.GetComponentInParent<DispararGelados>();
-        if (disparar != null)
+        if (other.CompareTag("Player")) // Certifica-te que o jogador tem esta Tag
         {
-            disparar.RecolherGelado();
-            Destroy(gameObject);
-        }
-        else
-        {
-            Debug.LogWarning("O jogador não tem o script DispararGelados!");
+            if (dispararGelados != null)
+            {
+                dispararGelados.RecolherGelado();
+                Destroy(gameObject); // Só destrói quando for recolhido
+            }
         }
     }
-}
-
-
 }

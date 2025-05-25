@@ -49,6 +49,9 @@ public class CarController : MonoBehaviour
 
     private bool estavaATravar = false;
 
+    private bool efeitoTravagemAtivo = false;
+
+
 
 
 
@@ -118,9 +121,19 @@ public class CarController : MonoBehaviour
 
         if (jogadorDentro && isBraking && !estavaATravar && somControlador != null)
         {
-            somControlador.TocarSomTravagem();
+            // Mapeia a velocidade (0 a 20) para volume (0.1 a 0.6)
+            float volumeTravagem = Mathf.Clamp(velocidade / 20f * 0.6f, 0.1f, 0.6f);
+            somControlador.TocarSomTravagem(volumeTravagem);
         }
         estavaATravar = isBraking;
+
+
+        // Ativa ou desativa EfeitoRodas ao travar
+        if (EfeitoRodas != null)
+        {
+            EfeitoRodas.SetBool("Emitir", isBraking);
+        }
+
 
 
 
@@ -131,6 +144,21 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         isBraking = Input.GetKey(KeyCode.Space);
+
+        if (isBraking && !efeitoTravagemAtivo)
+        {
+            if (EfeitoRodas != null)
+                EfeitoRodas.SetBool("Emitir", true);
+
+            efeitoTravagemAtivo = true;
+        }
+        else if (!isBraking && efeitoTravagemAtivo)
+        {
+            if (EfeitoRodas != null)
+                EfeitoRodas.SetBool("Emitir", false);
+
+            efeitoTravagemAtivo = false;
+        }
     }
 
 
@@ -152,7 +180,7 @@ public class CarController : MonoBehaviour
     {
         jogadorDentro = false;
         FumoCarrinha.SetBool("Emitir", false);
-        //dispararGelado.SaiuDoCarro();
+        dispararGelado.SaiuDoCarro();
 
         if (somParque != null)
             somParque.jogadorDentroDaCarrinha = false;
@@ -168,7 +196,7 @@ public class CarController : MonoBehaviour
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
 
-        // Ativar ou desativar som do motor conforme movimento
+
         float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
 
         if (somControlador != null)

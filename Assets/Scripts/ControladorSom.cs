@@ -8,7 +8,7 @@ public class ControladorSom : MonoBehaviour
     public AudioClip somMotor;
     public AudioClip somLigarCarro;
     public AudioClip somPersonalizado;
-     public AudioClip somTravagem;
+    public AudioClip somTravagem;
 
     void Start()
     {
@@ -16,16 +16,21 @@ public class ControladorSom : MonoBehaviour
             fonteSom = GetComponent<AudioSource>();
     }
 
-    public void TocarSom(AudioClip som)
+    public void TocarSom(AudioClip som, float volume = 1f)
     {
         if (som != null && fonteSom != null)
-            fonteSom.PlayOneShot(som);
+            fonteSom.PlayOneShot(som, volume);
+    }
+
+    public void TocarSomTravagem(float volume)
+    {
+        TocarSom(somTravagem, volume);
     }
 
     public void TocarSomTiro() => TocarSom(somTiro);
     public void TocarSomLigarCarro() => TocarSom(somLigarCarro);
     public void TocarSomPersonalizado() => TocarSom(somPersonalizado);
-    public void TocarSomTravagem() => TocarSom(somTravagem);
+
 
     // NOVOS métodos para o som do motor em loop
     public void IniciarSomMotor()

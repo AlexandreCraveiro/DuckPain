@@ -32,7 +32,7 @@ public class DispararGelados : MonoBehaviour
 
     void Disparar()
     {
-        if (!temGelado)
+        if (!jogadorDentroDoCarro && !temGelado)
         {
             Debug.Log("Não tens gelado para disparar.");
             return;
@@ -62,11 +62,14 @@ public class DispararGelados : MonoBehaviour
         }
 
         if (somControlador != null)
-        somControlador.TocarSomTiro();
+            somControlador.TocarSomTiro();
 
-
-        temGelado = false;
+        if (!jogadorDentroDoCarro)
+        {
+            temGelado = false;
+        }
     }
+
 
 
 
