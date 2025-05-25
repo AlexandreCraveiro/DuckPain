@@ -47,6 +47,9 @@ public class CarController : MonoBehaviour
 
     public SomAmbienteComDistancia somParque;
 
+    private bool estavaATravar = false;
+
+
 
 
     private void Update()
@@ -113,6 +116,12 @@ public class CarController : MonoBehaviour
             }
         }
 
+        if (jogadorDentro && isBraking && !estavaATravar && somControlador != null)
+        {
+            somControlador.TocarSomTravagem();
+        }
+        estavaATravar = isBraking;
+
 
 
     }
@@ -146,7 +155,7 @@ public class CarController : MonoBehaviour
         //dispararGelado.SaiuDoCarro();
 
         if (somParque != null)
-        somParque.jogadorDentroDaCarrinha = false;
+            somParque.jogadorDentroDaCarrinha = false;
     }
 
 
