@@ -18,6 +18,10 @@ public class CarController : MonoBehaviour
 
     public VisualEffect FumoCarrinha;
 
+    private float tempoUltimoX = -999f;
+    private float tempoCooldownX = 11f;
+
+
 
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
@@ -36,6 +40,12 @@ public class CarController : MonoBehaviour
     private bool isBraking;
     private bool jogadorDentro = false;
     public DispararGelados dispararGelado;
+
+    public ControladorSom somControlador;
+
+    private bool somMotorAtivo = false;
+
+
 
     private void Update()
     {
@@ -90,6 +100,19 @@ public class CarController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.X) && jogadorDentro && somControlador != null)
+        {
+            float tempoAtual = Time.time;
+            if (tempoAtual - tempoUltimoX >= tempoCooldownX)
+            {
+                somControlador.PararSomMotor(); // parar som motor
+                somControlador.TocarSomPersonalizado(); // tocar som X
+                tempoUltimoX = tempoAtual; // regista tempo do último X
+            }
+        }
+
+
+
     }
 
     private void GetInput()
@@ -105,13 +128,16 @@ public class CarController : MonoBehaviour
     {
         jogadorDentro = true;
         if (dispararGelado != null)
-        dispararGelado.jogadorDentroDoCarro = true;
+            dispararGelado.jogadorDentroDoCarro = true;
+
+        if (somControlador != null)
+            somControlador.TocarSomLigarCarro();
     }
 
     public void JogadorSaiuDoCarro()
     {
         jogadorDentro = false;
-        FumoCarrinha.SetBool("Emitir", false); 
+        FumoCarrinha.SetBool("Emitir", false);
         //dispararGelado.SaiuDoCarro();
     }
 
@@ -125,6 +151,20 @@ public class CarController : MonoBehaviour
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
 
+        // Ativar ou desativar som do motor conforme movimento
+        float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
+
+        if (somControlador != null)
+        {
+            if (Mathf.Abs(verticalInput) > 0.1f && jogadorDentro && velocidade > 0.2f)
+            {
+                somControlador.IniciarSomMotor();
+            }
+            else
+            {
+                somControlador.PararSomMotor();
+            }
+        }
 
 
     }
@@ -160,6 +200,6 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
 
-    
+
 
 }
