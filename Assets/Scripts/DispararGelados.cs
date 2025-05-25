@@ -11,7 +11,6 @@ public class DispararGelados : MonoBehaviour
 
     public ControladorSom somControlador;
 
-
     public float forcaDisparo = 700f;
     public float tempoEntreTiros = 1f;
 
@@ -19,12 +18,22 @@ public class DispararGelados : MonoBehaviour
 
     public bool jogadorDentroDoCarro = false;
 
-    // Novo: indica se o jogador tem um gelado para disparar
+    // Agora privado
     private bool temGelado = true;
+
+    public bool TemGelado()
+    {
+        return temGelado;
+    }
+
+    public void SetTemGelado(bool valor)
+    {
+        temGelado = valor;
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) // tecla para disparar, por exemplo
+        if (Input.GetKeyDown(KeyCode.F)) // tecla para disparar
         {
             Disparar();
         }
@@ -69,9 +78,6 @@ public class DispararGelados : MonoBehaviour
             temGelado = false;
         }
     }
-
-
-
 
     // Método para ser chamado quando o gelado é recolhido
     public void RecolherGelado()

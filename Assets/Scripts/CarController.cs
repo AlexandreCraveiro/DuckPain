@@ -180,11 +180,17 @@ public class CarController : MonoBehaviour
     {
         jogadorDentro = false;
         FumoCarrinha.SetBool("Emitir", false);
-        dispararGelado.SaiuDoCarro();
+
+        if (dispararGelado != null)
+        {
+            dispararGelado.SaiuDoCarro();
+            dispararGelado.RecolherGelado();
+        }
 
         if (somParque != null)
             somParque.jogadorDentroDaCarrinha = false;
     }
+
 
 
 
