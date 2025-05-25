@@ -24,6 +24,7 @@ public class NPC : MonoBehaviour
     public bool Atacou = false;
     public float TempoEspera = 5; //tempo que fica parado quando deixa de ver o player
     public float TempoAEspera = 0;
+    public Animator animator; //referência ao Animator do NPC
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,6 +35,7 @@ public class NPC : MonoBehaviour
         }
         Agente = GetComponent<NavMeshAgent>();
         TempoAEspera = TempoEspera;
+        animator = GetComponent<Animator>();
     }
     void Estado_Idle()
     {
@@ -45,6 +47,8 @@ public class NPC : MonoBehaviour
         Agente.speed = 0;
         Agente.velocity = Vector3.zero;
         Estado = NPCEstados.Idle;
+        if(animator != null)
+            animator.SetFloat("velocidade",0); // Define a velocidade do NPC no Animator para 0
     }
     void Estado_Patrulha()
     {
@@ -69,7 +73,8 @@ public class NPC : MonoBehaviour
             }
         }
         Agente.SetDestination(Pontos[ProximoPonto].position);
-
+        if (animator != null)
+            animator.SetFloat("velocidade", 1);
     }
     void Estado_Atacar()
     {
@@ -88,6 +93,8 @@ public class NPC : MonoBehaviour
             Agente.isStopped = false;
             Agente.SetDestination(Jogador.transform.position);
         }
+        if (animator != null)
+            animator.SetFloat("velocidade", 2);
     }
     //Devolve true se vê o player
     bool VePlayer()
