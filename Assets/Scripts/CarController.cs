@@ -45,6 +45,8 @@ public class CarController : MonoBehaviour
 
     private bool somMotorAtivo = false;
 
+    public SomAmbienteComDistancia somParque;
+
 
 
     private void Update()
@@ -132,6 +134,9 @@ public class CarController : MonoBehaviour
 
         if (somControlador != null)
             somControlador.TocarSomLigarCarro();
+
+        if (somParque != null)
+            somParque.jogadorDentroDaCarrinha = true;
     }
 
     public void JogadorSaiuDoCarro()
@@ -139,6 +144,9 @@ public class CarController : MonoBehaviour
         jogadorDentro = false;
         FumoCarrinha.SetBool("Emitir", false);
         //dispararGelado.SaiuDoCarro();
+
+        if (somParque != null)
+        somParque.jogadorDentroDaCarrinha = false;
     }
 
 
