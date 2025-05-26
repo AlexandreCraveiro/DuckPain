@@ -181,6 +181,7 @@ MonoBehaviour:
   Atacou: 0
   TempoEspera: 5
   TempoAEspera: 0
+  animator: {fileID: 0}
 --- !u!4 &2929217736016002533 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e62ad368d4713444ab8da722a7d16d78, type: 3}
