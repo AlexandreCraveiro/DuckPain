@@ -147,6 +147,7 @@ MonoBehaviour:
   Atacou: 0
   TempoEspera: 5
   TempoAEspera: 0
+  animator: {fileID: 0}
 --- !u!64 &2805891398465074889
 MeshCollider:
   m_ObjectHideFlags: 0
