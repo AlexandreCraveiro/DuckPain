@@ -120,6 +120,7 @@ public class Catch : MonoBehaviour
             if (obj == null) continue;
 
             float distance = Vector3.Distance(obj.transform.position, circleVisual.transform.position);
+            Debug.Log(distance);
             if (distance > maxRadius)
             {
                 // Solta o objeto
