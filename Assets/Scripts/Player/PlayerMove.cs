@@ -6,12 +6,12 @@ public class PlayerMove : MonoBehaviour
     public float VelocidadeRodar = 30;
     public float VelocidadeSalto = -2;
 
-    float _inputRodar; //unico que n�o � publico porque nao precisa de animacao
-    public float _inputAndar; 
+    float _inputRodar; //unico que nao e publico porque nao precisa de animacao
+    public float _inputAndar;
     public float _movimentoLateral;
     public bool IsGrounded;
     public bool IsJumping;
-     public Animator animator;
+    public Animator animator;
     Vector3 _velocidade;
 
     CharacterController controller;
@@ -26,8 +26,6 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (animator != null)
-            animator.SetFloat("velocidade", 0);
         //rotacao
         _inputRodar = SistemaInput.instance.DeltaRatoX;
         if (_inputRodar != 0)
@@ -51,27 +49,33 @@ public class PlayerMove : MonoBehaviour
         {
             _movimentoLateral = 0;
         }
+
+        //parado
+        if (_movimentoLateral == 0 && _inputAndar == 0)
+        {
+            if (animator != null)
+                animator.SetFloat("velocidade", 0);
+        }
         //correr
         if (SistemaInput.instance.Correr)
         {
             _inputAndar *= 2;
             if (animator != null)
-            animator.SetFloat("velocidade", 2);
+                animator.SetFloat("velocidade", 2);
         }
         //movimento
         Vector3 movimento = transform.forward * _inputAndar * VelocidadeAndar * Time.deltaTime;
         controller.Move(movimento);
-
-        //salto
         if (IsGrounded && SistemaInput.instance.Saltar)
         {
             _velocidade.y = Mathf.Sqrt(VelocidadeSalto * Physics.gravity.y);
             IsJumping = true;
+            animator.SetTrigger("jump");
         }
         else
         {
-            IsJumping = false;
             _velocidade += Physics.gravity * Time.deltaTime;
+            IsJumping = false;
         }
         controller.Move(_velocidade * Time.deltaTime);
         IsGrounded = controller.isGrounded;
