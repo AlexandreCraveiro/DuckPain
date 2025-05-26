@@ -16,11 +16,24 @@ public class PlayerInteraction : MonoBehaviour
     public Transform playerCameraTarget;
     public HintManager hintManager; // referenciar no Inspector
 
+    private Rigidbody carroRigidbody;
+
+    void Start()
+    {
+        carroRigidbody = car.GetComponent<Rigidbody>();
+
+        // Travar o carro ao iniciar (caso o jogador comece fora dele)
+        if (!isInCar && carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (canEnter && isInCar == false)
+            if (canEnter && !isInCar)
             {
                 EnterCar();
             }
@@ -64,6 +77,12 @@ public class PlayerInteraction : MonoBehaviour
         transform.position = seat.position;
         transform.rotation = seat.rotation;
 
+        // Liberta o carro para se mover
+        if (carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.None;
+        }
+
         // Ativa o script de condução
         carController.enabled = true;
         carController.JogadorEntrouNoCarro();
@@ -75,11 +94,10 @@ public class PlayerInteraction : MonoBehaviour
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = CarCameraTarget;
 
         isInCar = true;
-
         carController.FumoCarrinha.SetBool("Emitir", true);
         hintManager.ShowHint("Clica no 'E' para sair", 5f);
 
-        // ✅ Corrige bug: impede que continue a entrar se estiver fora do trigger
+        // Corrige bug de reentrada fora do trigger
         canEnter = false;
     }
 
@@ -87,19 +105,27 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("Saiu do carro");
 
-        // Coloca o modelo do jogador fora do carro
+        // Posiciona o jogador fora do carro
         playerModel.transform.position = posicaosaida.position;
         playerModel.SetActive(true);
         isInCar = false;
 
         carController.JogadorSaiuDoCarro();
-
         carController.enabled = false;
+
         playerModel.GetComponent<PlayerMove>().enabled = true;
 
+        // Volta a mudar a câmara para o jogador
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = playerCameraTarget;
+
+        // Mostra nova dica
         hintManager.ShowHint("Clica no 'E' para entrar", 2f);
+
+        // Imobiliza o carro
+        if (carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 }
-
 
