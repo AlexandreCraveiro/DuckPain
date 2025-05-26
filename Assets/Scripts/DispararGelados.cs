@@ -41,19 +41,24 @@ public class DispararGelados : MonoBehaviour
 
     void Disparar()
     {
+        // Fora da carrinha, só pode disparar se tiver gelado
         if (!jogadorDentroDoCarro && !temGelado)
         {
-            Debug.Log("Não tens gelado para disparar.");
+            Debug.Log("Não tens gelado para disparar. Volta à carrinha para recarregar.");
             return;
         }
 
+        // Controlar tempo entre tiros
         if (Time.time < proximoTiro) return;
         proximoTiro = Time.time + tempoEntreTiros;
 
+        // Define o ponto de disparo
         Transform spawnPoint = jogadorDentroDoCarro ? pontoDisparoCarrinha : pontoDisparoPlayer;
 
+        // Instancia o gelado
         GameObject gelado = Instantiate(geladoPrefab, spawnPoint.position, spawnPoint.rotation);
 
+        // Liga o script DispararGelados ao gelado
         GeladoColetavel geladoScript = gelado.GetComponent<GeladoColetavel>();
         if (geladoScript != null)
         {
@@ -64,35 +69,43 @@ public class DispararGelados : MonoBehaviour
             Debug.LogWarning("Prefab gelado não tem script GeladoColetavel!");
         }
 
+        // Aplica força
         Rigidbody rb = gelado.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.AddForce(spawnPoint.forward * forcaDisparo);
         }
 
+        // Toca som
         if (somControlador != null)
             somControlador.TocarSomTiro();
 
+        // Fora da carrinha, consome o gelado
         if (!jogadorDentroDoCarro)
         {
             temGelado = false;
         }
     }
 
-    // Método para ser chamado quando o gelado é recolhido
+    // Só recarrega se estiver dentro da carrinha
     public void RecolherGelado()
     {
-        Debug.Log("Gelado recolhido. Agora podes disparar de novo.");
         temGelado = true;
+        Debug.Log("Gelado recolhido. Agora podes disparar de novo.");
     }
+
 
     public void EntrouNoCarro()
     {
         jogadorDentroDoCarro = true;
+        temGelado = true; // Recarrega automaticamente ao entrar
+        Debug.Log("Entraste na carrinha. Gelado recarregado.");
     }
 
     public void SaiuDoCarro()
     {
         jogadorDentroDoCarro = false;
+        Debug.Log("Saíste da carrinha.");
     }
 }
+
