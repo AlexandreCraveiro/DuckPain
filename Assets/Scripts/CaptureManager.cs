@@ -8,6 +8,8 @@ public class CaptureManager : MonoBehaviour
     public int incorrectedCount = 0;
 
     public TextMeshProUGUI fullVanText;
+        public HintManager hintManager; // referenciar no Inspector
+
 
     IEnumerator ShowTemporaryMessage(string msg, float duration)
     {
@@ -21,7 +23,9 @@ public class CaptureManager : MonoBehaviour
 
         if (correctedCount + incorrectedCount >= 2) {
             Debug.Log("A carrinha está cheia");
-            StartCoroutine(ShowTemporaryMessage("A carrinha está cheia!", 2f));
+            //StartCoroutine(ShowTemporaryMessage("A carrinha está cheia!", 2f));
+            hintManager.ShowHint("A carrinha está cheia! Leva as crianças à instituição", 5f);
+
             return;
         }
 

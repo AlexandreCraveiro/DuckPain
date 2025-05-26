@@ -14,8 +14,8 @@ public class PlayerInteraction : MonoBehaviour
     public bool isInCar = false;
     public Transform posicaosaida;
     public Transform playerCameraTarget;
+    public HintManager hintManager; // referenciar no Inspector
 
-    
 
 
     void Update()
@@ -38,6 +38,10 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canEnter = true;
+            if (!isInCar)
+            {
+                hintManager.ShowHint("Clica no 'E' para entrar", 0);
+            }
         }
     }
 
@@ -46,6 +50,10 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             canEnter = false;
+            if (!isInCar)
+            {
+                hintManager.ShowHint(""); // limpa a dica
+            }
         }
     }
 
@@ -71,14 +79,16 @@ public class PlayerInteraction : MonoBehaviour
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = CarCameraTarget;
 
         isInCar = true;
-        
+
         carController.FumoCarrinha.SetBool("Emitir", true);
+        hintManager.ShowHint("Clica no 'E' para sair", 5f);
+
     }
 
     private void ExitCar()
     {
 
-        
+
 
         Debug.Log("Saiu do carro");
         playerModel.transform.position = posicaosaida.position;
@@ -90,8 +100,9 @@ public class PlayerInteraction : MonoBehaviour
         carController.enabled = false;
         playerModel.GetComponent<PlayerMove>().enabled = true;
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = playerCameraTarget;
+        hintManager.ShowHint("Clica no 'E' para entrar", 2f);
 
-    
+
 
 
     }

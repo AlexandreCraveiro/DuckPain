@@ -18,6 +18,10 @@ public class CarController : MonoBehaviour
 
     public VisualEffect FumoCarrinha;
 
+    private float tempoUltimoX = -999f;
+    private float tempoCooldownX = 11f;
+
+
 
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
@@ -36,6 +40,20 @@ public class CarController : MonoBehaviour
     private bool isBraking;
     private bool jogadorDentro = false;
     public DispararGelados dispararGelado;
+
+    public ControladorSom somControlador;
+
+    private bool somMotorAtivo = false;
+
+    public SomAmbienteComDistancia somParque;
+
+    private bool estavaATravar = false;
+
+    private bool efeitoTravagemAtivo = false;
+
+
+
+
 
     private void Update()
     {
@@ -90,6 +108,35 @@ public class CarController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.X) && jogadorDentro && somControlador != null)
+        {
+            float tempoAtual = Time.time;
+            if (tempoAtual - tempoUltimoX >= tempoCooldownX)
+            {
+                somControlador.PararSomMotor(); // parar som motor
+                somControlador.TocarSomPersonalizado(); // tocar som X
+                tempoUltimoX = tempoAtual; // regista tempo do último X
+            }
+        }
+
+        if (jogadorDentro && isBraking && !estavaATravar && somControlador != null)
+        {
+            // Mapeia a velocidade (0 a 20) para volume (0.1 a 0.6)
+            float volumeTravagem = Mathf.Clamp(velocidade / 20f * 0.6f, 0.1f, 0.6f);
+            somControlador.TocarSomTravagem(volumeTravagem);
+        }
+        estavaATravar = isBraking;
+
+
+        // Ativa ou desativa EfeitoRodas ao travar
+        if (EfeitoRodas != null)
+        {
+            EfeitoRodas.SetBool("Emitir", isBraking);
+        }
+
+
+
+
     }
 
     private void GetInput()
@@ -97,6 +144,21 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         isBraking = Input.GetKey(KeyCode.Space);
+
+        if (isBraking && !efeitoTravagemAtivo)
+        {
+            if (EfeitoRodas != null)
+                EfeitoRodas.SetBool("Emitir", true);
+
+            efeitoTravagemAtivo = true;
+        }
+        else if (!isBraking && efeitoTravagemAtivo)
+        {
+            if (EfeitoRodas != null)
+                EfeitoRodas.SetBool("Emitir", false);
+
+            efeitoTravagemAtivo = false;
+        }
     }
 
 
@@ -105,15 +167,30 @@ public class CarController : MonoBehaviour
     {
         jogadorDentro = true;
         if (dispararGelado != null)
-        dispararGelado.jogadorDentroDoCarro = true;
+            dispararGelado.jogadorDentroDoCarro = true;
+
+        if (somControlador != null)
+            somControlador.TocarSomLigarCarro();
+
+        if (somParque != null)
+            somParque.jogadorDentroDaCarrinha = true;
     }
 
     public void JogadorSaiuDoCarro()
     {
         jogadorDentro = false;
-        FumoCarrinha.SetBool("Emitir", false); 
-        //dispararGelado.SaiuDoCarro();
+        FumoCarrinha.SetBool("Emitir", false);
+
+        if (dispararGelado != null)
+        {
+            dispararGelado.SaiuDoCarro();
+            dispararGelado.RecolherGelado();
+        }
+
+        if (somParque != null)
+            somParque.jogadorDentroDaCarrinha = false;
     }
+
 
 
 
@@ -125,6 +202,20 @@ public class CarController : MonoBehaviour
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
 
+
+        float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
+
+        if (somControlador != null)
+        {
+            if (Mathf.Abs(verticalInput) > 0.1f && jogadorDentro && velocidade > 0.2f)
+            {
+                somControlador.IniciarSomMotor();
+            }
+            else
+            {
+                somControlador.PararSomMotor();
+            }
+        }
 
 
     }
@@ -160,6 +251,6 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
 
-    
+
 
 }
