@@ -7,6 +7,8 @@ public class CaptureManager : MonoBehaviour
     public int correctedCount = 0;
     public int incorrectedCount = 0;
 
+    public TextMeshProUGUI NrInVanText;
+
     public TextMeshProUGUI fullVanText;
         public HintManager hintManager; // referenciar no Inspector
 
@@ -54,5 +56,10 @@ public class CaptureManager : MonoBehaviour
 
     public int getIncorrectedCount() {
         return incorrectedCount;
+    }
+
+    void Update()
+    {
+        NrInVanText.text = (correctedCount+incorrectedCount).ToString() + "/2";
     }
 }
