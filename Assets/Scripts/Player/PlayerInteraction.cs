@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public GameObject playerModel; // o modelo vis�vel da personagem
-    public GameObject car;         // refer�ncia ao carro
-    public Transform seat;         // posi��o onde o jogador "entra"
-    public CarController carController; // script de condu��o
+    public GameObject playerModel; // o modelo visível da personagem
+    public GameObject car;         // referência ao carro
+    public Transform seat;         // posição onde o jogador "entra"
+    public CarController carController; // script de condução
     private bool canEnter = false;
     public CinemachineThirdPersonAim cinemachineThirdPersonAim;
     public Transform CarCameraTarget;
@@ -15,8 +15,6 @@ public class PlayerInteraction : MonoBehaviour
     public Transform posicaosaida;
     public Transform playerCameraTarget;
     public HintManager hintManager; // referenciar no Inspector
-
-
 
     void Update()
     {
@@ -59,8 +57,6 @@ public class PlayerInteraction : MonoBehaviour
 
     void EnterCar()
     {
-
-
         // Esconde o modelo da personagem
         playerModel.SetActive(false);
 
@@ -68,14 +64,14 @@ public class PlayerInteraction : MonoBehaviour
         transform.position = seat.position;
         transform.rotation = seat.rotation;
 
-        // Ativa o script de condu��o
+        // Ativa o script de condução
         carController.enabled = true;
         carController.JogadorEntrouNoCarro();
 
         // Desativa o controlo da personagem
         playerModel.GetComponent<PlayerMove>().enabled = false;
 
-        //muda o target da camera para o carro
+        // Muda o target da câmara para o carro
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = CarCameraTarget;
 
         isInCar = true;
@@ -83,14 +79,15 @@ public class PlayerInteraction : MonoBehaviour
         carController.FumoCarrinha.SetBool("Emitir", true);
         hintManager.ShowHint("Clica no 'E' para sair", 5f);
 
+        // ✅ Corrige bug: impede que continue a entrar se estiver fora do trigger
+        canEnter = false;
     }
 
     private void ExitCar()
     {
-
-
-
         Debug.Log("Saiu do carro");
+
+        // Coloca o modelo do jogador fora do carro
         playerModel.transform.position = posicaosaida.position;
         playerModel.SetActive(true);
         isInCar = false;
@@ -99,12 +96,10 @@ public class PlayerInteraction : MonoBehaviour
 
         carController.enabled = false;
         playerModel.GetComponent<PlayerMove>().enabled = true;
+
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = playerCameraTarget;
         hintManager.ShowHint("Clica no 'E' para entrar", 2f);
-
-
-
-
     }
 }
+
 

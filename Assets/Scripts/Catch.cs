@@ -80,6 +80,7 @@ public class Catch : MonoBehaviour
 
                 foreach (GameObject obj in grabbedObjects)
                 {
+                    if (obj == null) continue;
                     NPC kid = obj.GetComponent<NPC>();
                     if (kid != null)
                     {
@@ -195,7 +196,7 @@ public class Catch : MonoBehaviour
         foreach (var pair in objectTimers)
         {
             GameObject obj = pair.Key;
-            if (obj != null) continue;
+            if (obj == null) continue;
             float distance = Vector3.Distance(obj.transform.position, center);
             if (distance > radius) {
                 NPC kid = obj.GetComponent<NPC>();
