@@ -15,7 +15,7 @@ public class NPCCarControllerNav : MonoBehaviour
     [Header("Patrulha")]
     public Transform[] pontos;
     private int proximoPonto = 0;
-    public float pontoDeMudanca = 3f; // distância para mudar de ponto
+    public float pontoDeMudanca = 3f;
 
     [Header("Movimento")]
     public float motorForce = 1000f;
@@ -39,24 +39,43 @@ public class NPCCarControllerNav : MonoBehaviour
     private float tempoAtual = 0f;
 
     private NavMeshAgent navMeshAgent;
+    private PlayerInteraction playerInteraction;
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         tempoAtual = tempoIdle;
+
+        if (jogador != null)
+        {
+            playerInteraction = jogador.GetComponent<PlayerInteraction>();
+        }
     }
 
     void FixedUpdate()
     {
-        if (inimigo && jogador != null)
+        if (inimigo && jogador != null && playerInteraction != null)
         {
             float distanciaJogador = Vector3.Distance(transform.position, jogador.position);
 
-            if (estadoAtual != EstadoNPC.Perseguir && distanciaJogador <= distanciaVisao)
+            if (playerInteraction.isInCar)
             {
-                estadoAtual = EstadoNPC.Perseguir;
+                if (estadoAtual != EstadoNPC.Perseguir && distanciaJogador <= distanciaVisao)
+                {
+                    estadoAtual = EstadoNPC.Perseguir;
+                }
             }
-            else if (estadoAtual == EstadoNPC.Perseguir && distanciaJogador > distanciaDesistir)
+            else
+            {
+                if (estadoAtual == EstadoNPC.Perseguir)
+                {
+                    estadoAtual = EstadoNPC.Idle;
+                    tempoAtual = tempoIdle;
+                    navMeshAgent.ResetPath();
+                }
+            }
+
+            if (estadoAtual == EstadoNPC.Perseguir && distanciaJogador > distanciaDesistir)
             {
                 estadoAtual = EstadoNPC.Idle;
                 tempoAtual = tempoIdle;
@@ -132,13 +151,12 @@ public class NPCCarControllerNav : MonoBehaviour
         if (angulo > 0.5f)
             motor *= 0.5f;
 
-        float brake = 0f; // não travamos em patrulha
+        float brake = 0f;
 
         frontLeftWheel.steerAngle = steer * maxSteerAngle;
         frontRightWheel.steerAngle = steer * maxSteerAngle;
 
-        //frontLeftWheel.motorTorque = motor * motorForce;
-        //frontRightWheel.motorTorque = motor * motorForce;
+        // Este NPC usa NavMeshAgent para navegar
         navMeshAgent.SetDestination(destino);
 
         frontLeftWheel.brakeTorque = brake;
@@ -191,3 +209,4 @@ public class NPCCarControllerNav : MonoBehaviour
         visual.rotation = rot;
     }
 }
+

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public GameObject playerModel; // o modelo vis�vel da personagem
-    public GameObject car;         // refer�ncia ao carro
-    public Transform seat;         // posi��o onde o jogador "entra"
-    public CarController carController; // script de condu��o
+    public GameObject playerModel; // o modelo visível da personagem
+    public GameObject car;         // referência ao carro
+    public Transform seat;         // posição onde o jogador "entra"
+    public CarController carController; // script de condução
     private bool canEnter = false;
     public CinemachineThirdPersonAim cinemachineThirdPersonAim;
     public Transform CarCameraTarget;
@@ -16,13 +16,24 @@ public class PlayerInteraction : MonoBehaviour
     public Transform playerCameraTarget;
     public HintManager hintManager; // referenciar no Inspector
 
+    private Rigidbody carroRigidbody;
 
+    void Start()
+    {
+        carroRigidbody = car.GetComponent<Rigidbody>();
+
+        // Travar o carro ao iniciar (caso o jogador comece fora dele)
+        if (!isInCar && carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (canEnter && isInCar == false)
+            if (canEnter && !isInCar)
             {
                 EnterCar();
             }
@@ -59,8 +70,6 @@ public class PlayerInteraction : MonoBehaviour
 
     void EnterCar()
     {
-
-
         // Esconde o modelo da personagem
         playerModel.SetActive(false);
 
@@ -68,43 +77,55 @@ public class PlayerInteraction : MonoBehaviour
         transform.position = seat.position;
         transform.rotation = seat.rotation;
 
-        // Ativa o script de condu��o
+        // Liberta o carro para se mover
+        if (carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.None;
+        }
+
+        // Ativa o script de condução
         carController.enabled = true;
         carController.JogadorEntrouNoCarro();
 
         // Desativa o controlo da personagem
         playerModel.GetComponent<PlayerMove>().enabled = false;
 
-        //muda o target da camera para o carro
+        // Muda o target da câmara para o carro
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = CarCameraTarget;
 
         isInCar = true;
-
         carController.FumoCarrinha.SetBool("Emitir", true);
         hintManager.ShowHint("Clica no 'E' para sair", 5f);
 
+        // Corrige bug de reentrada fora do trigger
+        canEnter = false;
     }
 
     private void ExitCar()
     {
-
-
-
         Debug.Log("Saiu do carro");
+
+        // Posiciona o jogador fora do carro
         playerModel.transform.position = posicaosaida.position;
         playerModel.SetActive(true);
         isInCar = false;
 
         carController.JogadorSaiuDoCarro();
-
         carController.enabled = false;
+
         playerModel.GetComponent<PlayerMove>().enabled = true;
+
+        // Volta a mudar a câmara para o jogador
         cinemachineThirdPersonAim.GetComponent<CinemachineCamera>().Follow = playerCameraTarget;
+
+        // Mostra nova dica
         hintManager.ShowHint("Clica no 'E' para entrar", 2f);
 
-
-
-
+        // Imobiliza o carro
+        if (carroRigidbody != null)
+        {
+            carroRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        }
     }
 }
 

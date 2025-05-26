@@ -24,14 +24,14 @@ public class NPC : MonoBehaviour
     public bool Atacou = false;
     public float TempoEspera = 5; //tempo que fica parado quando deixa de ver o player
     public float TempoAEspera = 0;
-    public Animator animator; //referência ao Animator do NPC
+    public Animator animator; //referï¿½ncia ao Animator do NPC
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Jogador = GameObject.FindGameObjectWithTag("Player");
         if (Jogador == null)
         {
-            Debug.LogError("Jogador não encontrado");
+            Debug.LogError("Jogador nï¿½o encontrado");
         }
         Agente = GetComponent<NavMeshAgent>();
         TempoAEspera = TempoEspera;
@@ -66,7 +66,7 @@ public class NPC : MonoBehaviour
         Agente.speed = Velocidade;
         if(Vector3.Distance(transform.position, Pontos[ProximoPonto].position) < DistanciaMinima)
         {
-            ProximoPonto++; //avança para o próximo ponto
+            ProximoPonto++; //avanca para o proximo ponto
             if (ProximoPonto >= Pontos.Length) //se chegou ao ultimo ponto volta ao 0
             {
                 ProximoPonto = 0;
@@ -96,14 +96,14 @@ public class NPC : MonoBehaviour
         if (animator != null)
             animator.SetFloat("velocidade", 2);
     }
-    //Devolve true se vê o player
+    //Devolve true se vï¿½ o player
     bool VePlayer()
     {
         if (Vector3.Distance(transform.position, Jogador.transform.position) < DistanciaVisao)
         {
             return true;
         }
-        //verificar se vê o player
+        //verificar se vï¿½ o player
         if (Utils.CanYouSeeThis(Olhos, Jogador.transform, "Player", AnguloVisao, DistanciaVisao))
         {
             return true;

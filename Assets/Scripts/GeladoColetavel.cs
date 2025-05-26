@@ -3,25 +3,39 @@ using UnityEngine;
 public class GeladoColetavel : MonoBehaviour
 {
     private DispararGelados dispararGelados;
+    private Rigidbody rb;
 
-    private bool podeSerRecolhido = true;
+    [Tooltip("Velocidade abaixo da qual o gelado pode ser recolhido")]
+    public float velocidadeRecolha = 0.2f;
 
-    public void SetDispararGelados(DispararGelados script)
+    [Tooltip("Tempo mínimo após ser lançado antes de poder ser recolhido")]
+    public float tempoMinimo = 0.5f;
+
+    private float tempoDeNascimento;
+
+    public void SetDispararGelados(DispararGelados controlador)
     {
-        dispararGelados = script;
+        dispararGelados = controlador;
+        tempoDeNascimento = Time.time;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
     {
-        if (!podeSerRecolhido) return;
+        rb = GetComponent<Rigidbody>();
+    }
 
-        if (other.CompareTag("Player")) // Certifica-te que o jogador tem esta Tag
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && PodeSerRecolhido())
         {
-            if (dispararGelados != null)
-            {
-                dispararGelados.RecolherGelado();
-                Destroy(gameObject); // Só destrói quando for recolhido
-            }
+            dispararGelados.RecolherGelado();
+            Destroy(gameObject);
         }
     }
+
+    private bool PodeSerRecolhido()
+    {
+        return Time.time - tempoDeNascimento >= tempoMinimo && rb.linearVelocity.magnitude < velocidadeRecolha;
+    }
 }
+

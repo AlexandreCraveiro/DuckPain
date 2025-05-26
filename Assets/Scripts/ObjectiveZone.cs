@@ -1,12 +1,14 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ObjectiveZone : MonoBehaviour
 {
     public TextMeshProUGUI resultsText;
     public TextMeshProUGUI score;
     public int total = 3;
+    public int wrongKidsCount = 0;
     public int scoreCount = 0;
 
 
@@ -23,8 +25,15 @@ public class ObjectiveZone : MonoBehaviour
             CaptureManager manager = FindFirstObjectByType<CaptureManager>();
             if (manager != null) {
                 string message = "Foram capturadas " + manager.getCorrectedCount().ToString() + " corretas e " + manager.getIncorrectedCount().ToString() + " incorretas.";
-                scoreCount = manager.getCorrectedCount();
-                StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
+                scoreCount = scoreCount + manager.getCorrectedCount();
+                wrongKidsCount = wrongKidsCount + manager.getIncorrectedCount();
+                manager.ResetCounters();
+                // StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
+                if (scoreCount == total && wrongKidsCount == 0) {
+                    SceneManager.LoadScene("LevelCompleted");
+                } else if (scoreCount == total && wrongKidsCount > 0) {
+                    SceneManager.LoadScene("LevelLose");
+                }
             } else {
                 Debug.Log("CaptureManager not found");
             }
