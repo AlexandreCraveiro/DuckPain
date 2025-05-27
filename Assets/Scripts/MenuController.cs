@@ -5,7 +5,7 @@ public class MenuController : MonoBehaviour
 {
     public void Jogar()
     {
-        SceneManager.LoadScene("NomeDaCenaDoJogo");
+        SceneManager.LoadScene("Map");
     }
 
     public void Configuracoes()
@@ -17,5 +17,10 @@ public class MenuController : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("Jogo encerrado");
+    }
+
+    public void VoltarMenuPrincipal()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

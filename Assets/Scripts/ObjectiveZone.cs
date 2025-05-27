@@ -31,7 +31,9 @@ public class ObjectiveZone : MonoBehaviour
                 // StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
                 if (scoreCount == total && wrongKidsCount == 0) {
                     SceneManager.LoadScene("LevelCompleted");
+                    Cursor.lockState = CursorLockMode.None;
                 } else if (scoreCount == total && wrongKidsCount > 0) {
+                    Cursor.lockState = CursorLockMode.None;
                     SceneManager.LoadScene("LevelLose");
                 }
             } else {
