@@ -30,6 +30,8 @@ public class ObjectiveZone : MonoBehaviour
                 manager.ResetCounters();
                 // StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
                 if (scoreCount == total && wrongKidsCount == 0) {
+                    PlayerPrefs.SetInt("level", 1);
+                    PlayerPrefs.Save();
                     SceneManager.LoadScene("LevelCompleted");
                     Cursor.lockState = CursorLockMode.None;
                 } else if (scoreCount == total && wrongKidsCount > 0) {
