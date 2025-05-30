@@ -18,6 +18,13 @@ public class DispararGelados : MonoBehaviour
 
     public bool jogadorDentroDoCarro = false;
 
+    HintManager hintManager;
+
+    private void Start()
+    {
+        hintManager = FindAnyObjectByType<HintManager>();
+    }
+
     // Agora privado
     private bool temGelado = true;
 
@@ -41,10 +48,12 @@ public class DispararGelados : MonoBehaviour
 
     void Disparar()
     {
+        if (Time.timeScale == 0) return; // não dispara se o jogo estiver pausado
         // Fora da carrinha, só pode disparar se tiver gelado
         if (!jogadorDentroDoCarro && !temGelado)
         {
             Debug.Log("Não tens gelado para disparar. Volta à carrinha para recarregar.");
+            hintManager.ShowHint("Não tens gelado para disparar. Volta à carrinha para recarregar.");
             return;
         }
 
@@ -57,7 +66,9 @@ public class DispararGelados : MonoBehaviour
 
         // Instancia o gelado
         GameObject gelado = Instantiate(geladoPrefab, spawnPoint.position, spawnPoint.rotation);
-
+        Destroy(gelado, 5f); // destrói o gelado após 5 segundos para evitar acumulação
+        if (jogadorDentroDoCarro == false)
+            gelado.tag = "FreeIceCream";
         // Liga o script DispararGelados ao gelado
         GeladoColetavel geladoScript = gelado.GetComponent<GeladoColetavel>();
         if (geladoScript != null)

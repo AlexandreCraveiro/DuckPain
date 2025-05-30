@@ -3,9 +3,9 @@ using UnityEngine;
 public class DropZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(other);
+       // Debug.Log(other);
         if (other.CompareTag("Capturable+") || other.CompareTag("Capturable-")) {
-            Debug.Log("Objeto capturado");
+         //   Debug.Log("Objeto capturado");
             CaptureManager manager = FindFirstObjectByType<CaptureManager>();
             if (manager != null) {
                 manager.RegisterCapturedObject(other.gameObject);

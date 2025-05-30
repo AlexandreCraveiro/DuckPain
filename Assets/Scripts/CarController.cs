@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-
 public class CarController : MonoBehaviour
 {
     public float motorForce = 100f;
@@ -11,17 +10,14 @@ public class CarController : MonoBehaviour
     private bool arrancou = false;
     private float tempoArranque = 0f;
     public float duracaoEfeitoArranque = 3f;
-
     private bool podeAtivarArranque = true;
 
     public VisualEffect EfeitoRodas;
-
     public VisualEffect FumoCarrinha;
 
     private float tempoUltimoX = -999f;
     private float tempoCooldownX = 11f;
-
-
+    private bool musicaATocar = false;
 
     public WheelCollider frontLeftWheelCollider;
     public WheelCollider frontRightWheelCollider;
@@ -39,25 +35,16 @@ public class CarController : MonoBehaviour
     private float currentBrakeForce;
     private bool isBraking;
     private bool jogadorDentro = false;
+
     public DispararGelados dispararGelado;
-
     public ControladorSom somControlador;
-
-    private bool somMotorAtivo = false;
-
     public SomAmbienteComDistancia somParque;
 
     private bool estavaATravar = false;
-
     private bool efeitoTravagemAtivo = false;
-
-
-
-
 
     private void Update()
     {
-
         GetInput();
         HandleMotor();
         HandleSteering();
@@ -78,14 +65,12 @@ public class CarController : MonoBehaviour
 
         float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
 
-        // Se o carro estiver praticamente parado, permite novo arranque
         if (velocidade < 0.1f)
         {
             podeAtivarArranque = true;
-            arrancou = false; // opcional: reforça o reset
+            arrancou = false;
         }
 
-        // Ativa o efeito apenas ao arrancar do zero
         if (podeAtivarArranque && velocidade > 0.5f && Mathf.Abs(verticalInput) > 0.1f)
         {
             arrancou = true;
@@ -96,7 +81,6 @@ public class CarController : MonoBehaviour
                 EfeitoRodas.SetBool("Emitir", true);
         }
 
-        // Desliga o efeito após os 2 segundos
         if (arrancou)
         {
             tempoArranque -= Time.deltaTime;
@@ -108,35 +92,47 @@ public class CarController : MonoBehaviour
             }
         }
 
+        // ⬇️ Alternar música personalizada com a tecla X
         if (Input.GetKeyDown(KeyCode.X) && jogadorDentro && somControlador != null)
         {
-            float tempoAtual = Time.time;
-            if (tempoAtual - tempoUltimoX >= tempoCooldownX)
+            if (somControlador.ATocarMusica())
             {
-                somControlador.PararSomMotor(); // parar som motor
-                somControlador.TocarSomPersonalizado(); // tocar som X
-                tempoUltimoX = tempoAtual; // regista tempo do último X
+                somControlador.PararSomPersonalizado();
             }
+            else
+            {
+                somControlador.IniciarSomPersonalizado();
+            }
+            //float tempoAtual = Time.time;
+            //if (tempoAtual - tempoUltimoX >= tempoCooldownX)
+            //{
+            //    if (!musicaATocar)
+            //    {
+            //        somControlador.PararSomMotor();
+            //        somControlador.IniciarSomPersonalizado();
+            //        musicaATocar = true;
+            //    }
+            //    else
+            //    {
+            //        somControlador.PararSomPersonalizado();
+            //        somControlador.IniciarSomMotor(); // opcional
+            //        musicaATocar = false;
+            //    }
+
+            //    tempoUltimoX = tempoAtual;
+            //}
         }
 
         if (jogadorDentro && isBraking && !estavaATravar && somControlador != null)
         {
-            // Mapeia a velocidade (0 a 20) para volume (0.1 a 0.6)
             float volumeTravagem = Mathf.Clamp(velocidade / 20f * 0.6f, 0.1f, 0.6f);
             somControlador.TocarSomTravagem(volumeTravagem);
         }
+
         estavaATravar = isBraking;
 
-
-        // Ativa ou desativa EfeitoRodas ao travar
         if (EfeitoRodas != null)
-        {
             EfeitoRodas.SetBool("Emitir", isBraking);
-        }
-
-
-
-
     }
 
     private void GetInput()
@@ -160,8 +156,6 @@ public class CarController : MonoBehaviour
             efeitoTravagemAtivo = false;
         }
     }
-
-
 
     public void JogadorEntrouNoCarro()
     {
@@ -191,9 +185,6 @@ public class CarController : MonoBehaviour
             somParque.jogadorDentroDaCarrinha = false;
     }
 
-
-
-
     private void HandleMotor()
     {
         frontLeftWheelCollider.motorTorque = verticalInput * motorForce;
@@ -202,10 +193,9 @@ public class CarController : MonoBehaviour
         currentBrakeForce = isBraking ? brakeForce : 0f;
         ApplyBraking();
 
-
         float velocidade = GetComponent<Rigidbody>().linearVelocity.magnitude;
 
-        if (somControlador != null)
+        if (somControlador != null && !musicaATocar)
         {
             if (Mathf.Abs(verticalInput) > 0.1f && jogadorDentro && velocidade > 0.2f)
             {
@@ -216,9 +206,8 @@ public class CarController : MonoBehaviour
                 somControlador.PararSomMotor();
             }
         }
-
-
     }
+
     private void ApplyBraking()
     {
         frontLeftWheelCollider.brakeTorque = currentBrakeForce;
@@ -250,7 +239,4 @@ public class CarController : MonoBehaviour
         UpdateSingleWheel(rearLeftWheelCollider, rearLeftWheelTransform);
         UpdateSingleWheel(rearRightWheelCollider, rearRightWheelTransform);
     }
-
-
-
 }

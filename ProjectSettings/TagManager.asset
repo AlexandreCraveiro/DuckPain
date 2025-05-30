@@ -8,6 +8,8 @@ TagManager:
   - Capturable+
   - Capturable-
   - IceCream
+  - FreeIceCream
+  - Adulto
   layers:
   - Default
   - TransparentFX

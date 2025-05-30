@@ -38,5 +38,13 @@ public class SomAmbienteComDistancia : MonoBehaviour
             if (audioFonte.isPlaying)
                 audioFonte.Stop();
         }
+        if (Time.timeScale == 0)
+        {
+            audioFonte.Pause(); // Pausa o som se o jogo estiver pausado
+        }
+        else
+        {
+            audioFonte.UnPause(); // Retoma o som se o jogo estiver ativo
+        }
     }
 }
