@@ -95,7 +95,13 @@ public class PlayerInteraction : MonoBehaviour
 
         isInCar = true;
         carController.FumoCarrinha.SetBool("Emitir", true);
-        hintManager.ShowHint("Clica no 'E' para sair", 5f);
+        string[] dicas = {
+        "Clica no 'E' para sair",
+        "Clica no 'X' para tocar a música.",
+        "A música atrai as crianças que não queres apanhar.",
+        "Quando a carrinha estiver cheia, leva as crianças à instituição"
+    };
+        hintManager.ShowHintsSequential(dicas, 5f);
 
         // Corrige bug de reentrada fora do trigger
         canEnter = false;
