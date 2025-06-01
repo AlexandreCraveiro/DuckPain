@@ -14,6 +14,10 @@ public class NPCCarControllerNav : MonoBehaviour
     public float velocidade = 5f;
     public float velocidadeAtual;
 
+    [Header("Sirene")]
+    public AudioSource sireneAudio;
+
+
     [Header("Patrulha")]
     public Transform[] pontos;
     private int proximoPonto = 0;
@@ -58,14 +62,14 @@ public class NPCCarControllerNav : MonoBehaviour
 
     void FixedUpdate()
     {
-        //verifica se é preciso recuperar velocidade
-        if (velocidade!=velocidadeAtual)
+        //verifica se ï¿½ preciso recuperar velocidade
+        if (velocidade != velocidadeAtual)
         {
             if (TempoColidiuComGelado + 2 < Time.time)
             {
                 velocidadeAtual = velocidade;
                 navMeshAgent.speed = velocidadeAtual;
-                Debug.Log("Recuperando velocidade após colisão com gelado.");
+                Debug.Log("Recuperando velocidade apï¿½s colisï¿½o com gelado.");
             }
         }
         if (inimigo && jogador != null && playerInteraction != null)
@@ -109,6 +113,7 @@ public class NPCCarControllerNav : MonoBehaviour
                 Estado_Perseguir();
                 break;
         }
+        ControlarSirene();
 
         UpdateWheelVisuals();
     }
@@ -233,5 +238,24 @@ public class NPCCarControllerNav : MonoBehaviour
             Debug.Log("Colidiu com gelado! Velocidade reduzida para: " + velocidadeAtual);
         }
     }
+    
+    void ControlarSirene()
+{
+    if (estadoAtual == EstadoNPC.Perseguir)
+    {
+        if (!sireneAudio.isPlaying)
+        {
+            sireneAudio.Play();
+        }
+    }
+    else
+    {
+        if (sireneAudio.isPlaying)
+        {
+            sireneAudio.Stop();
+        }
+    }
+}
+
 }
 

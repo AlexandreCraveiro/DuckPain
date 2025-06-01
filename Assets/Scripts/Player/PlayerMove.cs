@@ -6,7 +6,7 @@ public class PlayerMove : MonoBehaviour
     public float VelocidadeRodar = 30;
     public float VelocidadeSalto = -2;
 
-    float _inputRodar; //unico que nao e publico porque nao precisa de animacao
+    float _inputRodar;
     public float _inputAndar;
     public float _movimentoLateral;
     public bool IsGrounded;
@@ -16,56 +16,56 @@ public class PlayerMove : MonoBehaviour
 
     CharacterController controller;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AudioClip somPassos;
+    AudioSource audioSource;
+
+    // Start
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+    // Update
     void Update()
     {
-        //rotacao
+        // Rotação
         _inputRodar = SistemaInput.instance.DeltaRatoX;
         if (_inputRodar != 0)
         {
             transform.Rotate(transform.up * _inputRodar * VelocidadeRodar * Time.deltaTime);
         }
-        //movimento
+
+        // Movimento
         _inputAndar = SistemaInput.instance.EixoVertical;
         _movimentoLateral = SistemaInput.instance.EixoHorizontal;
-        if (animator != null)
-            animator.SetFloat("velocidade", 1);
 
-        //movimento lateral 
-        // para bloquear o andar para o lado _inputAndar != 0 && 
+        bool estaAndar = _inputAndar != 0 || _movimentoLateral != 0;
+
+        if (animator != null)
+            animator.SetFloat("velocidade", estaAndar ? 1 : 0);
+
+        // Lateral
         if (_movimentoLateral != 0)
         {
             Vector3 vector3 = transform.right * _movimentoLateral * VelocidadeAndar * Time.deltaTime;
             controller.Move(vector3);
         }
-        else
-        {
-            _movimentoLateral = 0;
-        }
 
-        //parado
-        if (_movimentoLateral == 0 && _inputAndar == 0)
-        {
-            if (animator != null)
-                animator.SetFloat("velocidade", 0);
-        }
-        //correr
+        // Correr
         if (SistemaInput.instance.Correr)
         {
             _inputAndar *= 2;
             if (animator != null)
                 animator.SetFloat("velocidade", 2);
         }
-        //movimento
+
+        // Movimento frontal
         Vector3 movimento = transform.forward * _inputAndar * VelocidadeAndar * Time.deltaTime;
         controller.Move(movimento);
+
+        // Saltar
         if (IsGrounded && SistemaInput.instance.Saltar)
         {
             _velocidade.y = Mathf.Sqrt(VelocidadeSalto * Physics.gravity.y);
@@ -77,8 +77,28 @@ public class PlayerMove : MonoBehaviour
             _velocidade += Physics.gravity * Time.deltaTime;
             IsJumping = false;
         }
+
         controller.Move(_velocidade * Time.deltaTime);
         IsGrounded = controller.isGrounded;
 
+        
+        if (estaAndar && IsGrounded)
+{
+    if (!audioSource.isPlaying)
+    {
+        audioSource.clip = somPassos;
+        audioSource.Play();
+    }
+
+    // Aumenta o pitch se estiver a correr
+    if (SistemaInput.instance.Correr)
+        audioSource.pitch = 1.5f; // Mais rápido
+    else
+        audioSource.pitch = 1.0f; // Normal
+}
+else
+{
+    audioSource.Stop();
+}
     }
 }
