@@ -10,6 +10,7 @@ TagManager:
   - IceCream
   - FreeIceCream
   - Adulto
+  - DontDestroyOnLoad
   layers:
   - Default
   - TransparentFX
