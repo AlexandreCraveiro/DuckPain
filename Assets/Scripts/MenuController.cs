@@ -5,6 +5,7 @@ public class MenuController : MonoBehaviour
 {
     public void Jogar()
     {
+        UIAudioManager.instance.PlayClick();
         SceneManager.LoadScene("Map");
     }
 
