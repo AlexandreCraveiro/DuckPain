@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class MenuJogo : MonoBehaviour
 {
@@ -17,9 +18,16 @@ public class MenuJogo : MonoBehaviour
         Time.timeScale = 1;            //retoma o tempo
         Cursor.lockState = CursorLockMode.Locked; //esconde o cursor do rato
     }
+
+    private IEnumerator SairComDelay()
+    {
+        yield return new WaitForSeconds(1f); // Espera 1 segundo
+        SceneManager.LoadScene("Menu");
+    }
+
     public void Sair()
     {
-        SceneManager.LoadScene(nomedomenuprincipal);
+        StartCoroutine(SairComDelay());
     }
 
     // Update is called once per frame
