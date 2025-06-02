@@ -23,25 +23,31 @@ public class CaptureManager : MonoBehaviour
     public void RegisterCapturedObject(GameObject capturedObject)
     {
 
-        if (correctedCount + incorrectedCount >= 2) {
-            Debug.Log("A carrinha está cheia");
-            //StartCoroutine(ShowTemporaryMessage("A carrinha está cheia!", 2f));
-            hintManager.ShowHint("A carrinha está cheia! Leva as crianças à instituição", 5f);
+        Catch catchScript = FindFirstObjectByType<Catch>();
 
-            return;
-        }
+        if (catchScript != null) {
+            if (catchScript.grabbedObjects.Contains(capturedObject)) {
+                if (correctedCount + incorrectedCount >= 2) {
+                Debug.Log("A carrinha está cheia");
+                //StartCoroutine(ShowTemporaryMessage("A carrinha está cheia!", 2f));
+                hintManager.ShowHint("A carrinha está cheia! Leva as crianças à instituição", 5f);
 
-        if (capturedObject.CompareTag("Capturable+"))
-        {
-            correctedCount++;
-        }
-        else if (capturedObject.CompareTag("Capturable-"))
-        {
-            incorrectedCount++;
-        }
+                return;
+            }
 
-        Debug.Log("Objeto capturado: " + capturedObject.name);
-        Destroy(capturedObject);
+            if (capturedObject.CompareTag("Capturable+"))
+            {
+                correctedCount++;
+            }
+            else if (capturedObject.CompareTag("Capturable-"))
+            {
+                incorrectedCount++;
+            }
+
+            Debug.Log("Objeto capturado: " + capturedObject.name);
+            Destroy(capturedObject);
+                }
+            }
     }
 
     public void ResetCounters()
