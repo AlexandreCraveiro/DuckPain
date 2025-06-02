@@ -4,20 +4,27 @@ public class UIAudioManager : MonoBehaviour
 {
     public static UIAudioManager instance;
     public AudioSource audioSource;
+    public AudioClip click;
 
     
 
     void Awake()
     {
         if (instance == null)
+        {
             instance = this;
-        else
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
             Destroy(gameObject);
+            return;
+        }
+
+        audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     public void PlayClick()
     {
-        if (audioSource != null && audioSource.clip != null)
-            audioSource.Play();
+            audioSource.PlayOneShot(click);
     }
 }
