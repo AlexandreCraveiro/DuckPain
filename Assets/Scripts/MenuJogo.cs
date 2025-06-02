@@ -17,8 +17,10 @@ public class MenuJogo : MonoBehaviour
         Time.timeScale = 1;            //retoma o tempo
         Cursor.lockState = CursorLockMode.Locked; //esconde o cursor do rato
     }
+
     public void Sair()
     {
+        UIAudioManager.instance.PlayClick();
         SceneManager.LoadScene(nomedomenuprincipal);
     }
 

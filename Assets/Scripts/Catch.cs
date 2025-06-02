@@ -23,7 +23,7 @@ public class Catch : MonoBehaviour
     private Dictionary<GameObject, float> objectTimers = new Dictionary<GameObject, float>();
 
     // Para guardar os objetos que estão a ser levados pelo pato
-    private List<GameObject> grabbedObjects = new List<GameObject>();
+    public List<GameObject> grabbedObjects = new List<GameObject>();
     // Para guarder os offsets dos objetos levados pelo pato
     private Dictionary<GameObject, Vector3> objectOffsets = new Dictionary<GameObject, Vector3>();
 
