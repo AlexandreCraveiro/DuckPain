@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\somambientecomdistancia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\somambientecomdistancia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\controladorsom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\controladorsom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\disparargelados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\disparargelados.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SomAmbienteComDistancia.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\SomAmbienteComDistancia.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SomAmbienteComDistancia.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\SomAmbienteComDistancia.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SomAmbienteComDistancia.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwC4AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T16:04:52.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ControladorSom.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\ControladorSom.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ControladorSom.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\ControladorSom.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ControladorSom.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAYwF0AAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T15:58:27.906Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DispararGelados.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\DispararGelados.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DispararGelados.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\DispararGelados.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DispararGelados.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAcwDIAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T15:57:27.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MenuJogo.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MenuJogo.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MenuJogo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T15:53:15.995Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
