@@ -28,4 +28,8 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+    public void DoInicioParaMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
 }
