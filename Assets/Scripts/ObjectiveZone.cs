@@ -10,8 +10,9 @@ public class ObjectiveZone : MonoBehaviour
     public int total = 3;
     public int wrongKidsCount = 0;
     public int scoreCount = 0;
-
-
+    public GameObject barreira;
+    public GameObject painelsucesso;
+    public GameObject painellose;
     IEnumerator ShowTemporaryMessage(string msg, float duration, CaptureManager manager)
     {
         resultsText.text = msg;
@@ -32,11 +33,13 @@ public class ObjectiveZone : MonoBehaviour
                 if (scoreCount == total && wrongKidsCount == 0) {
                     PlayerPrefs.SetInt("level", 1);
                     PlayerPrefs.Save();
-                    SceneManager.LoadScene("LevelCompleted");
+                    Time.timeScale = 0f; // Pausa o jogo
+                    painelsucesso.SetActive(true);
+                    Destroy(barreira);
                     Cursor.lockState = CursorLockMode.None;
                 } else if (scoreCount == total && wrongKidsCount > 0) {
                     Cursor.lockState = CursorLockMode.None;
-                    SceneManager.LoadScene("LevelLose");
+                    painellose.SetActive(true);
                 }
             } else {
                 Debug.Log("CaptureManager not found");
