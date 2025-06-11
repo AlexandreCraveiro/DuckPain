@@ -13,6 +13,7 @@ public class ObjectiveZone : MonoBehaviour
     public GameObject barreira;
     public GameObject painelsucesso;
     public GameObject painellose;
+    public GameObject kids2;
     IEnumerator ShowTemporaryMessage(string msg, float duration, CaptureManager manager)
     {
         resultsText.text = msg;
@@ -37,7 +38,11 @@ public class ObjectiveZone : MonoBehaviour
                     painelsucesso.SetActive(true);
                     Destroy(barreira);
                     Cursor.lockState = CursorLockMode.None;
-                } else if (scoreCount == total && wrongKidsCount > 0) {
+                    scoreCount = 0;
+                    total = 5;
+                    kids2.SetActive(true);
+                }
+                else if (scoreCount == total && wrongKidsCount > 0) {
                     Cursor.lockState = CursorLockMode.None;
                     painellose.SetActive(true);
                 }
