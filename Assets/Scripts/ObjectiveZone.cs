@@ -53,6 +53,6 @@ public class ObjectiveZone : MonoBehaviour
     }
 
     void Update() {
-        score.text = scoreCount.ToString() + "/" + total.ToString();
+        score.text = "Na instituição: "+scoreCount.ToString() + "/" + total.ToString();
     }
 }
