@@ -9,6 +9,13 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene("Map");
     }
 
+    public void NewGame()
+    {
+        PlayerPrefs.SetInt("level", 0); // Reseta o nível para 0
+        PlayerPrefs.Save(); // Salva as alterações
+        Jogar(); // Inicia o jogo
+    }
+
     public void Configuracoes()
     {
         SceneManager.LoadScene("Configuracoes");

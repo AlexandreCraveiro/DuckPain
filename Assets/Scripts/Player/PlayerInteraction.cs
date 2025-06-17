@@ -63,7 +63,7 @@ public class PlayerInteraction : MonoBehaviour
             canEnter = false;
             if (!isInCar)
             {
-                hintManager.ShowHint(""); // limpa a dica
+                hintManager.HideHint(); // Esconde a dica se o jogador sair do trigger
             }
         }
     }

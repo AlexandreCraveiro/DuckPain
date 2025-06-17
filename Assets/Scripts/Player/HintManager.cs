@@ -6,11 +6,13 @@ public class HintManager : MonoBehaviour
 {
     public TextMeshProUGUI hintText;
     private float hintTimer;
-public UnityEngine.UI.Image hintBackground;
-
+    public UnityEngine.UI.Image hintBackground;
+    ObjectiveZone objectiveZone;
 
     void Start()
     {
+        objectiveZone = FindAnyObjectByType<ObjectiveZone>();
+
         string[] dicas = {
         "Objetivo: Apanhar 3 crianças e levá-las à instituição.",
         "Usa a carrinha dos gelados para apanhar crianças!",
@@ -18,31 +20,38 @@ public UnityEngine.UI.Image hintBackground;
         "Cuidado, a polícia anda atrás de ti!",
         "Clica no 'F' para lançar gelados e distrair a polícia.",
         "Podes voltar a apanhar os gelados."
-    };
-        ShowHintsSequential(dicas, 4f);
-
+        };
+        if (objectiveZone.nivel == 0)
+            ShowHintsSequential(dicas, 4f);
+        else
+            HideHint();
     }
 
 
-void Update()
-{
-    if (hintTimer > 0)
+    void Update()
     {
-        hintTimer -= Time.deltaTime;
-        if (hintTimer <= 0)
+        if (hintTimer > 0)
         {
-            hintText.text = "";
-            hintBackground.enabled = false; // <-- Esconde o fundo
+            hintTimer -= Time.deltaTime;
+            if (hintTimer <= 0)
+            {
+                HideHint();
+            }
         }
     }
-}
 
-public void ShowHint(string message, float duration = 3f)
-{
-    hintText.text = message;
-    hintBackground.enabled = true; // <-- Ativa o fundo
-    hintTimer = duration;
-}
+    public void HideHint()
+    {
+        hintText.text = "";
+        hintBackground.enabled = false; // <-- Esconde o fundo
+    }
+
+    public void ShowHint(string message, float duration = 3f)
+    {
+        hintText.text = message;
+        hintBackground.enabled = true; // <-- Ativa o fundo
+        hintTimer = duration;
+    }
 
 
     public void ShowHintsSequential(string[] messages, float durationPerHint = 3f)

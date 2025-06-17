@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEditor.Build;
 
 public class ObjectiveZone : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class ObjectiveZone : MonoBehaviour
     public GameObject barreira;
     public GameObject painelsucesso;
     public GameObject painellose;
-    public GameObject kids2;
+    public GameObject[] kids;
+    public int nivel;
+    public bool apanhado;
+    HintManager hintManager;
     IEnumerator ShowTemporaryMessage(string msg, float duration, CaptureManager manager)
     {
         resultsText.text = msg;
@@ -21,26 +25,36 @@ public class ObjectiveZone : MonoBehaviour
         resultsText.text = "";
         manager.ResetCounters();
     }
-
+    private void Awake()
+    {
+        nivel = PlayerPrefs.GetInt("level", 0);
+        Debug.Log("Nível carregado: " + nivel);
+        AbreNivel(nivel+1);
+        Time.timeScale = 1f; // Garante que o jogo começa com o tempo normal
+        hintManager = FindAnyObjectByType<HintManager>();
+    }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("EnterVehicle")) {
-            CaptureManager manager = FindFirstObjectByType<CaptureManager>();
+            CaptureManager manager = other.GetComponentInChildren<CaptureManager>();
             if (manager != null) {
+                if (manager.getCorrectedCount() + manager.getIncorrectedCount() == 0) {
+                    hintManager.ShowHint("Captura crianças e volta aqui para as entregar.", 5f);
+                    return;
+                }
                 string message = "Foram capturadas " + manager.getCorrectedCount().ToString() + " corretas e " + manager.getIncorrectedCount().ToString() + " incorretas.";
                 scoreCount = scoreCount + manager.getCorrectedCount();
                 wrongKidsCount = wrongKidsCount + manager.getIncorrectedCount();
                 manager.ResetCounters();
-                // StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
-                if (scoreCount == total && wrongKidsCount == 0) {
-                    PlayerPrefs.SetInt("level", 1);
+                //StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
+                hintManager.ShowHint(message, 5f);
+                if (scoreCount == total && wrongKidsCount == 0)
+                {
+                    PlayerPrefs.SetInt("level", nivel);
                     PlayerPrefs.Save();
+                    nivel++;
                     Time.timeScale = 0f; // Pausa o jogo
                     painelsucesso.SetActive(true);
-                    Destroy(barreira);
-                    Cursor.lockState = CursorLockMode.None;
-                    scoreCount = 0;
-                    total = 5;
-                    kids2.SetActive(true);
+                    AbreNivel(nivel);
                 }
                 else if (scoreCount == total && wrongKidsCount > 0) {
                     Cursor.lockState = CursorLockMode.None;
@@ -52,7 +66,26 @@ public class ObjectiveZone : MonoBehaviour
         }
     }
 
+    private void AbreNivel(int nivel)
+    {
+        Debug.Log("Abrindo nível: " + nivel);
+        foreach (GameObject kid in kids)
+        {
+            kid.SetActive(false);
+        }
+        kids[nivel-1].SetActive(true);
+
+        if (nivel == 2)
+        {
+
+            Destroy(barreira);
+            Cursor.lockState = CursorLockMode.None;
+            scoreCount = 0;
+            total = 5;
+        }
+    }
+
     void Update() {
-        score.text = "Na instituição: "+scoreCount.ToString() + "/" + total.ToString();
+        score.text = scoreCount.ToString() + "/" + total.ToString();
     }
 }

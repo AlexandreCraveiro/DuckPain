@@ -5,6 +5,16 @@ public class MenuJogo : MonoBehaviour
 {
     public GameObject menuJogo;
     public string nomedomenuprincipal;
+    ObjectiveZone objectiveZone;
+
+    public void Start()
+    {
+        objectiveZone = FindAnyObjectByType<ObjectiveZone>();
+    }
+    public void Recomeçar()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //recarrega a cena atual
+    }
     public void Pausa()
     {
         menuJogo.SetActive(true);   //mostra o menu
@@ -27,6 +37,10 @@ public class MenuJogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (objectiveZone.apanhado)
+        {
+            return; // Se o jogador foi apanhado, não processa mais nada
+        }
         if (SistemaInput.instance.TeclaEsc)
         {
             if (Time.timeScale == 0)
