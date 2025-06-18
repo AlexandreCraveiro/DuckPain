@@ -21,3 +21,5 @@ Thumbs.db
 # Logs and crash dumps
 *.log
 sysinfo.txt
+
+WebBuild/

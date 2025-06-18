@@ -28,9 +28,9 @@ public class ObjectiveZone : MonoBehaviour
     private void Awake()
     {
         nivel = PlayerPrefs.GetInt("level", 0);
-        Debug.Log("Nível carregado: " + nivel);
+        Debug.Log("Nï¿½vel carregado: " + nivel);
         AbreNivel(nivel+1);
-        Time.timeScale = 1f; // Garante que o jogo começa com o tempo normal
+        Time.timeScale = 1f; // Garante que o jogo comeï¿½a com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
     }
     private void OnTriggerEnter(Collider other) {
@@ -38,7 +38,7 @@ public class ObjectiveZone : MonoBehaviour
             CaptureManager manager = other.GetComponentInChildren<CaptureManager>();
             if (manager != null) {
                 if (manager.getCorrectedCount() + manager.getIncorrectedCount() == 0) {
-                    hintManager.ShowHint("Captura crianças e volta aqui para as entregar.", 5f);
+                    hintManager.ShowHint("Captura crianï¿½as e volta aqui para as entregar.", 5f);
                     return;
                 }
                 string message = "Foram capturadas " + manager.getCorrectedCount().ToString() + " corretas e " + manager.getIncorrectedCount().ToString() + " incorretas.";
@@ -55,6 +55,7 @@ public class ObjectiveZone : MonoBehaviour
                     Time.timeScale = 0f; // Pausa o jogo
                     painelsucesso.SetActive(true);
                     AbreNivel(nivel);
+                    Cursor.lockState = CursorLockMode.None;
                 }
                 else if (scoreCount == total && wrongKidsCount > 0) {
                     Cursor.lockState = CursorLockMode.None;
@@ -68,7 +69,7 @@ public class ObjectiveZone : MonoBehaviour
 
     private void AbreNivel(int nivel)
     {
-        Debug.Log("Abrindo nível: " + nivel);
+        Debug.Log("Abrindo nï¿½vel: " + nivel);
         foreach (GameObject kid in kids)
         {
             kid.SetActive(false);
