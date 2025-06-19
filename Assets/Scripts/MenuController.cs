@@ -1,8 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class MenuController : MonoBehaviour
 {
+    public GameObject videoScreen; 
+    VideoPlayer videoPlayer;
+    private void Start()
+    {
+        videoPlayer=videoScreen.GetComponent<VideoPlayer>();
+        videoPlayer.Prepare();
+    }
     public void Jogar()
     {
         UIAudioManager.instance.PlayClick();
@@ -13,7 +21,10 @@ public class MenuController : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", 0); // Reseta o nível para 0
         PlayerPrefs.Save(); // Salva as alterações
-        Jogar(); // Inicia o jogo
+        videoScreen.SetActive(true); // Ativa a tela de vídeo
+        videoPlayer.Play(); // Inicia o vídeo de introdução
+        Invoke(nameof(Jogar), 35); // Aguarda o vídeo terminar para iniciar o jogo
+        
     }
 
     public void Configuracoes()
