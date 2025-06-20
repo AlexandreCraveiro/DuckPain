@@ -27,11 +27,11 @@ public class ObjectiveZone : MonoBehaviour
     }
     private void Awake()
     {
-        nivel = PlayerPrefs.GetInt("level", 0);
         Debug.Log("N�vel carregado: " + nivel);
         AbreNivel(nivel+1);
         Time.timeScale = 1f; // Garante que o jogo come�a com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
+        Debug.Log("Level: " + PlayerPrefs.GetInt("level"));
     }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("EnterVehicle")) {
@@ -50,11 +50,13 @@ public class ObjectiveZone : MonoBehaviour
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
                     PlayerPrefs.SetInt("level", nivel);
+                    Debug.Log("Nivel: " + nivel);
+                    Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
                     PlayerPrefs.Save();
-                    nivel++;
+                    // nivel++;
                     Time.timeScale = 0f; // Pausa o jogo
                     painelsucesso.SetActive(true);
-                    AbreNivel(nivel);
+                    AbreNivel(nivel+1);
                     Cursor.lockState = CursorLockMode.None;
                 }
                 else if (scoreCount == total && wrongKidsCount > 0) {
@@ -70,14 +72,15 @@ public class ObjectiveZone : MonoBehaviour
     private void AbreNivel(int nivel)
     {
         Debug.Log("Abrindo n�vel: " + nivel);
-        foreach (GameObject kid in kids)
-        {
-            kid.SetActive(false);
-        }
-        kids[nivel-1].SetActive(true);
 
-        if (nivel == 2)
+        if (PlayerPrefs.GetInt("level") == 1)
         {
+
+            foreach (GameObject kid in kids)
+            {
+                kid.SetActive(false);
+            }
+            kids[nivel-1].SetActive(true);
 
             Destroy(barreira);
             Cursor.lockState = CursorLockMode.None;
