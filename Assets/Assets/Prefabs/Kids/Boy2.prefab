@@ -29,13 +29,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8175805220434068809}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000049589936, y: -0.7933532, z: 0.00000006462681, w: 0.6087616}
-  m_LocalPosition: {x: 8.20813, y: -0.35, z: 2.7206182}
+  m_LocalRotation: {x: 0.000000039267302, y: -0.6923802, z: 0.00000007137132, w: 0.72153294}
+  m_LocalPosition: {x: 8.209771, y: -0.35000002, z: 2.717956}
   m_LocalScale: {x: 99.99997, y: 100, z: 99.99997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -87.638, z: 0}
 --- !u!33 &5589601272316465238
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -148,6 +148,11 @@ MonoBehaviour:
   TempoEspera: 5
   TempoAEspera: 0
   animator: {fileID: 0}
+  controladorSom: {fileID: 0}
+  tag_criancas: Capturable-
+  carro: {fileID: 0}
+  DistanciaOuvir: 20
+  DistanciaParaGeladosGratis: 5
 --- !u!64 &2805891398465074889
 MeshCollider:
   m_ObjectHideFlags: 0
