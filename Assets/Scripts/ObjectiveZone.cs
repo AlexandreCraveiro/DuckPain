@@ -27,8 +27,9 @@ public class ObjectiveZone : MonoBehaviour
     }
     private void Awake()
     {
+        nivel = PlayerPrefs.GetInt("level");
         Debug.Log("N�vel carregado: " + nivel);
-        AbreNivel(nivel+1);
+        AbreNivel(nivel);
         Time.timeScale = 1f; // Garante que o jogo come�a com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
         Debug.Log("Level: " + PlayerPrefs.GetInt("level"));
@@ -73,20 +74,23 @@ public class ObjectiveZone : MonoBehaviour
     {
         Debug.Log("Abrindo n�vel: " + nivel);
 
-        if (PlayerPrefs.GetInt("level") == 1)
-        {
 
             foreach (GameObject kid in kids)
             {
                 kid.SetActive(false);
             }
-            kids[nivel-1].SetActive(true);
+            kids[nivel].SetActive(true);
 
-            Destroy(barreira);
-            Cursor.lockState = CursorLockMode.None;
-            scoreCount = 0;
-            total = 5;
-        }
+            if (nivel >= 1)
+            {
+                Destroy(barreira);
+                Cursor.lockState = CursorLockMode.None;
+                scoreCount = 0;
+                total = 5;
+            }
+
+
+
     }
 
     void Update() {
