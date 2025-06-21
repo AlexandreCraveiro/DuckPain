@@ -11,7 +11,7 @@ public class MenuJogo : MonoBehaviour
     {
         objectiveZone = FindAnyObjectByType<ObjectiveZone>();
     }
-    public void Recomeçar()
+    public void Recomecar()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //recarrega a cena atual
     }
@@ -39,7 +39,7 @@ public class MenuJogo : MonoBehaviour
     {
         if (objectiveZone.apanhado)
         {
-            return; // Se o jogador foi apanhado, não processa mais nada
+            return; // Se o jogador foi apanhado, nï¿½o processa mais nada
         }
         if (SistemaInput.instance.TeclaEsc)
         {
