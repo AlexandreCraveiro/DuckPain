@@ -50,7 +50,7 @@ public class ObjectiveZone : MonoBehaviour
                 hintManager.ShowHint(message, 5f);
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
-                    PlayerPrefs.SetInt("level", nivel);
+                    PlayerPrefs.SetInt("level", nivel + 1);
                     Debug.Log("Nivel: " + nivel);
                     Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
                     PlayerPrefs.Save();
