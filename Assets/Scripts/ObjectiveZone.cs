@@ -8,6 +8,7 @@ public class ObjectiveZone : MonoBehaviour
 {
     public TextMeshProUGUI resultsText;
     public TextMeshProUGUI score;
+    public TextMeshProUGUI successMessage;
     public int total = 3;
     public int wrongKidsCount = 0;
     public int scoreCount = 0;
@@ -33,6 +34,18 @@ public class ObjectiveZone : MonoBehaviour
         Time.timeScale = 1f; // Garante que o jogo come�a com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
         Debug.Log("Level: " + PlayerPrefs.GetInt("level"));
+
+        switch(nivel) {
+            case 0:
+                total = 3;
+                break;
+            case 1:
+                total = 5;
+                break;
+            case 2:
+                total = 1;
+                break;
+        }
     }
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("EnterVehicle")) {
@@ -50,12 +63,14 @@ public class ObjectiveZone : MonoBehaviour
                 hintManager.ShowHint(message, 5f);
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
+                    successMessage.text = "Nivel " + (nivel + 1) + " concluido com sucesso!";
                     PlayerPrefs.SetInt("level", nivel + 1);
                     Debug.Log("Nivel: " + nivel);
                     Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
                     PlayerPrefs.Save();
                     // nivel++;
                     Time.timeScale = 0f; // Pausa o jogo
+                    
                     painelsucesso.SetActive(true);
                     AbreNivel(nivel+1);
                     Cursor.lockState = CursorLockMode.None;
@@ -81,13 +96,14 @@ public class ObjectiveZone : MonoBehaviour
             }
             kids[nivel].SetActive(true);
 
-            if (nivel >= 1)
-            {
-                Destroy(barreira);
-                Cursor.lockState = CursorLockMode.None;
-                scoreCount = 0;
-                total = 5;
-            }
+        if (nivel > 0)
+        {
+            Debug.Log("Destruindo barreira");
+            Destroy(barreira);
+            Cursor.lockState = CursorLockMode.None;
+            scoreCount = 0;
+            total = 5;
+        }
 
 
 
