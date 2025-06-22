@@ -31,7 +31,7 @@ public class ObjectiveZone : MonoBehaviour
         nivel = PlayerPrefs.GetInt("level");
         Debug.Log("N�vel carregado: " + nivel);
         AbreNivel(nivel);
-        Time.timeScale = 1f; // Garante que o jogo come�a com o tempo normal
+        Time.timeScale = 1f; // Garante que o jogo comeca com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
         Debug.Log("Level: " + PlayerPrefs.GetInt("level"));
 
@@ -43,7 +43,7 @@ public class ObjectiveZone : MonoBehaviour
                 total = 5;
                 break;
             case 2:
-                total = 1;
+                total = 7;
                 break;
         }
     }
