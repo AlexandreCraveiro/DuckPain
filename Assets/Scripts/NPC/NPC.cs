@@ -32,14 +32,21 @@ public class NPC : MonoBehaviour
     public float DistanciaOuvir = 20f;
     public float DistanciaParaGeladosGratis = 5f; //distância para procurar gelados grátis
     GameObject geladoApanhar;
+    PlayerInteraction playerInteraction; //referência ao script de interação do jogador, se necessário
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Jogador = GameObject.FindGameObjectWithTag("Player");
+        if (Jogador == null)
+        {
+            Jogador = GameObject.FindGameObjectWithTag("Player");
+        }
+        //Jogador = GameObject.FindGameObjectWithTag("Player");
         if (Jogador == null)
         {
             Debug.LogError("Jogador n�o encontrado");
         }
+        playerInteraction = GameObject.FindFirstObjectByType<PlayerInteraction>();
+
         Agente = GetComponent<NavMeshAgent>();
         TempoAEspera = TempoEspera;
         animator = GetComponent<Animator>();
@@ -158,6 +165,11 @@ public class NPC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //se é inimigo e o jogador está no carro, muda o estado para patrulhar
+        if (Inimigo && Estado!= NPCEstados.Patrulha && playerInteraction.isInCar)
+        {
+            Estado = NPCEstados.Patrulha;
+        }
         //se é criança (tag começa por Capturable) procura gelados grátis
         if (this.tag.StartsWith("Capturable"))
         {

@@ -12,7 +12,7 @@ public class ObjectiveZone : MonoBehaviour
     public int total = 3;
     public int wrongKidsCount = 0;
     public int scoreCount = 0;
-    public GameObject barreira;
+    public GameObject[] barreira;
     public GameObject painelsucesso;
     public GameObject painellose;
     public GameObject[] kids;
@@ -99,7 +99,7 @@ public class ObjectiveZone : MonoBehaviour
         if (nivel > 0)
         {
             Debug.Log("Destruindo barreira");
-            Destroy(barreira);
+            Destroy(barreira[nivel-1]);
             Cursor.lockState = CursorLockMode.None;
             scoreCount = 0;
             total = 5;
