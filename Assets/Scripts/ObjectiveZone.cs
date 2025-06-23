@@ -43,7 +43,7 @@ public class ObjectiveZone : MonoBehaviour
                 total = 5;
                 break;
             case 2:
-                total = 7;
+                total = 1;
                 break;
         }
     }
@@ -90,7 +90,7 @@ public class ObjectiveZone : MonoBehaviour
         if(nivel > 2) {
             return;
         }
-        
+
         Debug.Log("Abrindo n�vel: " + nivel);
 
 
