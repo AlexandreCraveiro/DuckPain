@@ -87,6 +87,10 @@ public class ObjectiveZone : MonoBehaviour
 
     private void AbreNivel(int nivel)
     {
+        if(nivel > 2) {
+            return;
+        }
+        
         Debug.Log("Abrindo n�vel: " + nivel);
 
 
@@ -99,7 +103,10 @@ public class ObjectiveZone : MonoBehaviour
         if (nivel > 0)
         {
             Debug.Log("Destruindo barreira");
-            Destroy(barreira[nivel-1]);
+            Destroy(barreira[0]);
+            if (nivel > 1) {
+                Destroy(barreira[1]);
+            }
             Cursor.lockState = CursorLockMode.None;
             scoreCount = 0;
             total = 5;
@@ -111,5 +118,8 @@ public class ObjectiveZone : MonoBehaviour
 
     void Update() {
         score.text = scoreCount.ToString() + "/" + total.ToString();
+        if(nivel > 2) {
+            score.text = "Todos os níveis concluidos!";
+        }
     }
 }
