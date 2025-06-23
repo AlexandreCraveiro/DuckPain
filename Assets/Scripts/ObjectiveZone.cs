@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEditor.Build;
+using UnityEngine.Video;
 
 public class ObjectiveZone : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class ObjectiveZone : MonoBehaviour
     public int nivel;
     public bool apanhado;
     HintManager hintManager;
+    public VideoClip[] videoClips;
+    public GameObject cutscenePanel;
+    VideoPlayer videoPlayer;
     IEnumerator ShowTemporaryMessage(string msg, float duration, CaptureManager manager)
     {
         resultsText.text = msg;
@@ -61,19 +65,13 @@ public class ObjectiveZone : MonoBehaviour
                 manager.ResetCounters();
                 //StartCoroutine(ShowTemporaryMessage(message, 2f, manager));
                 hintManager.ShowHint(message, 5f);
+                //Verifica se acabou o nível
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
-                    successMessage.text = "Nivel " + (nivel + 1) + " concluido com sucesso!";
-                    PlayerPrefs.SetInt("level", nivel + 1);
-                    Debug.Log("Nivel: " + nivel);
-                    Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
-                    PlayerPrefs.Save();
-                    // nivel++;
+                    //NivelConcluido();
+                    FindAnyObjectByType<PlayerInteraction>().ExitCar(); //sai do carro
                     Time.timeScale = 0f; // Pausa o jogo
-                    
-                    painelsucesso.SetActive(true);
-                    AbreNivel(nivel+1);
-                    Cursor.lockState = CursorLockMode.None;
+                    StartCoroutine(nameof(ShowCutScene));
                 }
                 else if (scoreCount == total && wrongKidsCount > 0) {
                     Cursor.lockState = CursorLockMode.None;
@@ -84,6 +82,8 @@ public class ObjectiveZone : MonoBehaviour
             }
         }
     }
+
+
 
     private void AbreNivel(int nivel)
     {
@@ -116,6 +116,41 @@ public class ObjectiveZone : MonoBehaviour
 
     }
 
+    IEnumerator ShowCutScene()
+    {
+        float duracao = (float)videoClips[nivel].length;
+        Debug.Log("Showing cutscene for level: " + nivel + " com a duração de "+ duracao);
+        cutscenePanel.SetActive(true);
+        videoPlayer = cutscenePanel.GetComponentInChildren<VideoPlayer>();
+        videoPlayer.clip = videoClips[nivel];
+        videoPlayer.Play();
+        yield return new WaitForSecondsRealtime (duracao); // Espera a duração do vídeo + 1 segundo
+        Debug.Log("Cutscene ended, closing panel.");
+        cutscenePanel.SetActive(false);
+        videoPlayer.Stop();
+        NivelConcluido();
+    }
+
+    public void CloseCutScene()
+    {
+        cutscenePanel.SetActive(false);
+        videoPlayer.Stop();
+        NivelConcluido();
+    }
+    private void NivelConcluido()
+    {
+        successMessage.text = "Nivel " + (nivel + 1) + " concluido com sucesso!";
+        PlayerPrefs.SetInt("level", nivel + 1);
+        Debug.Log("Nivel: " + nivel);
+        Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
+        PlayerPrefs.Save();
+        // nivel++;
+        
+
+        painelsucesso.SetActive(true);
+        AbreNivel(nivel + 1);
+        Cursor.lockState = CursorLockMode.None;
+    }
     void Update() {
         score.text = scoreCount.ToString() + "/" + total.ToString();
         if(nivel > 2) {

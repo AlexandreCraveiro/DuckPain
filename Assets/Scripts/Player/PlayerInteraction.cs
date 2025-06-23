@@ -107,7 +107,7 @@ public class PlayerInteraction : MonoBehaviour
         canEnter = false;
     }
 
-    private void ExitCar()
+    public void ExitCar()
     {
         Debug.Log("Saiu do carro");
 
