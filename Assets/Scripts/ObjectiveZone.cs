@@ -43,7 +43,7 @@ public class ObjectiveZone : MonoBehaviour
                 total = 5;
                 break;
             case 2:
-                total = 1;
+                total = 2;
                 break;
         }
     }
