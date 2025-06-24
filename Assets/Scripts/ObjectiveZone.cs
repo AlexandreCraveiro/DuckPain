@@ -23,6 +23,7 @@ public class ObjectiveZone : MonoBehaviour
     public VideoClip[] videoClips;
     public GameObject cutscenePanel;
     VideoPlayer videoPlayer;
+    public GameObject panelFinal;
     IEnumerator ShowTemporaryMessage(string msg, float duration, CaptureManager manager)
     {
         resultsText.text = msg;
@@ -72,6 +73,7 @@ public class ObjectiveZone : MonoBehaviour
                 //Verifica se acabou o nível
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
+
                     // NivelConcluido();
                     FindAnyObjectByType<PlayerInteraction>().ExitCar(); //sai do carro
                     Time.timeScale = 0f; // Pausa o jogo
@@ -144,6 +146,12 @@ public class ObjectiveZone : MonoBehaviour
     private void NivelConcluido()
     {
         nivel++;
+        //Verificar se é o ultimo nível
+        if (nivel >= 2)
+        {
+            panelFinal.SetActive(true);
+            return;
+        }
         successMessage.text = "Nivel " + nivel + " concluido com sucesso!";
         PlayerPrefs.SetInt("level", nivel);
         PlayerPrefs.Save();
