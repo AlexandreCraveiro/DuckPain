@@ -697,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a738b8503ec0e6499aee17e0d082d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoScreen: {fileID: 0}
 --- !u!4 &1385596509
 Transform:
   m_ObjectHideFlags: 0
