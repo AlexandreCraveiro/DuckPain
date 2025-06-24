@@ -38,7 +38,11 @@ public class ObjectiveZone : MonoBehaviour
         Time.timeScale = 1f; // Garante que o jogo comeca com o tempo normal
         hintManager = FindAnyObjectByType<HintManager>();
         Debug.Log("Level: " + PlayerPrefs.GetInt("level"));
+        setLevelTotal();
 
+    }
+
+    private void setLevelTotal() {
         switch(nivel) {
             case 0:
                 total = 3;
@@ -68,7 +72,7 @@ public class ObjectiveZone : MonoBehaviour
                 //Verifica se acabou o nível
                 if (scoreCount == total && wrongKidsCount == 0)
                 {
-                    //NivelConcluido();
+                    // NivelConcluido();
                     FindAnyObjectByType<PlayerInteraction>().ExitCar(); //sai do carro
                     Time.timeScale = 0f; // Pausa o jogo
                     StartCoroutine(nameof(ShowCutScene));
@@ -139,17 +143,16 @@ public class ObjectiveZone : MonoBehaviour
     }
     private void NivelConcluido()
     {
-        successMessage.text = "Nivel " + (nivel + 1) + " concluido com sucesso!";
-        PlayerPrefs.SetInt("level", nivel + 1);
+        nivel++;
+        successMessage.text = "Nivel " + nivel + " concluido com sucesso!";
+        PlayerPrefs.SetInt("level", nivel);
+        PlayerPrefs.Save();
         Debug.Log("Nivel: " + nivel);
         Debug.Log("Nivel salvo: " + PlayerPrefs.GetInt("level"));
-        PlayerPrefs.Save();
-        // nivel++;
-        
-
         painelsucesso.SetActive(true);
-        AbreNivel(nivel + 1);
+        AbreNivel(nivel);
         Cursor.lockState = CursorLockMode.None;
+        setLevelTotal();
     }
     void Update() {
         score.text = scoreCount.ToString() + "/" + total.ToString();
