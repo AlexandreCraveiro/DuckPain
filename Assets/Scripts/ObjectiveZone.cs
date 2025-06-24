@@ -150,6 +150,8 @@ public class ObjectiveZone : MonoBehaviour
         if (nivel > 2)
         {
             panelFinal.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
             return;
         }
         successMessage.text = "Nivel " + nivel + " concluido com sucesso!";
