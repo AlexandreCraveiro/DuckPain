@@ -147,7 +147,7 @@ public class ObjectiveZone : MonoBehaviour
     {
         nivel++;
         //Verificar se é o ultimo nível
-        if (nivel >= 2)
+        if (nivel > 2)
         {
             panelFinal.SetActive(true);
             return;
