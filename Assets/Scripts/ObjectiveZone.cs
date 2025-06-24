@@ -18,7 +18,8 @@ public class ObjectiveZone : MonoBehaviour
     public int nivel;
     public bool apanhado;
     HintManager hintManager;
-    public VideoClip[] videoClips;
+    public string[] videoClips;
+    public float[] duracaoClips;
     public GameObject cutscenePanel;
     VideoPlayer videoPlayer;
     public GameObject panelFinal;
@@ -122,11 +123,12 @@ public class ObjectiveZone : MonoBehaviour
 
     IEnumerator ShowCutScene()
     {
-        float duracao = (float)videoClips[nivel].length;
+        string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, videoClips[nivel]);
+        float duracao = duracaoClips[nivel];
         Debug.Log("Showing cutscene for level: " + nivel + " com a duração de "+ duracao);
         cutscenePanel.SetActive(true);
         videoPlayer = cutscenePanel.GetComponentInChildren<VideoPlayer>();
-        videoPlayer.clip = videoClips[nivel];
+        videoPlayer.url = videoPath;
         videoPlayer.Play();
         yield return new WaitForSecondsRealtime (duracao); // Espera a duração do vídeo + 1 segundo
         Debug.Log("Cutscene ended, closing panel.");

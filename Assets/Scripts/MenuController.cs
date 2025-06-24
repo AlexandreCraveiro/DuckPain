@@ -25,6 +25,8 @@ public class MenuController : MonoBehaviour
     {
         PlayerPrefs.SetInt("level", 0); // Reseta o nível para 0
         PlayerPrefs.Save(); // Salva as alterações
+        string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, "Duckpain1.mp4");
+        videoPlayer.url = videoPath;
         videoScreen.SetActive(true); // Ativa a tela de vídeo
         videoPlayer.Play(); // Inicia o vídeo de introdução
         Invoke(nameof(Jogar), 35); // Aguarda o vídeo terminar para iniciar o jogo
