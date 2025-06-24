@@ -6,6 +6,7 @@ public class MenuJogo : MonoBehaviour
     public GameObject menuJogo;
     public string nomedomenuprincipal;
     ObjectiveZone objectiveZone;
+    public GameObject PainelControlos;
 
     public void Start()
     {
@@ -48,5 +49,15 @@ public class MenuJogo : MonoBehaviour
             else
                 Pausa();
         }
+    }
+
+     public void MostrarControlos()
+    {
+        PainelControlos.SetActive(true);
+    }
+
+    public void FecharControlos()
+    {
+        PainelControlos.SetActive(false);
     }
 }
