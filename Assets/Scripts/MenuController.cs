@@ -8,8 +8,11 @@ public class MenuController : MonoBehaviour
     VideoPlayer videoPlayer;
     private void Start()
     {
-        videoPlayer=videoScreen.GetComponent<VideoPlayer>();
-        videoPlayer.Prepare();
+        if (videoScreen != null)
+        {
+            videoPlayer = videoScreen.GetComponent<VideoPlayer>();
+            videoPlayer.Prepare();
+        }
     }
     public void Jogar()
     {
