@@ -27,6 +27,11 @@ public class MenuController : MonoBehaviour
         
     }
 
+    public void Controlos()
+    {
+        SceneManager.LoadScene("Controlos");
+    }
+
     public void Configuracoes()
     {
         SceneManager.LoadScene("Configuracoes");

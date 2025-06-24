@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\objectivezone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\objectivezone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectivezone.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|c:\\users\\alexandre craveiro\\desktop\\tdm\\3ano\\2semestre\\duckpaindj\\assets\\scripts\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\carcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerinteraction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\player\\hintmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npc\\npccarcontrollernav.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\npc\\npccarcontrollernav.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\menujogo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{152FD383-E15C-3AE3-BBA5-9421F50F889E}|Assembly-CSharp.csproj|C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\assets\\scripts\\npc\\apanhaplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -78,31 +82,33 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "NPCCarControllerNav.cs",
-              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
-              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
-              "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
-              "ViewState": "AgIAAL8AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CarController.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\CarController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\CarController.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\CarController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\CarController.cs",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T16:14:54.637Z"
+              "WhenOpened": "2025-06-23T16:22:11.597Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "MenuController.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MenuController.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuController.cs",
               "RelativeToolTip": "Assets\\Scripts\\MenuController.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBcAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T15:31:50.371Z"
+              "WhenOpened": "2025-06-17T15:31:50.371Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "ApanhaPlayer.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\ApanhaPlayer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\ApanhaPlayer.cs",
@@ -114,7 +120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "HintManager.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\HintManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\HintManager.cs",
@@ -126,19 +132,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "PlayerInteraction.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\PlayerInteraction.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerInteraction.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Player\\PlayerInteraction.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerInteraction.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAABWAAAAAAAAAA==",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAcwG0AAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-12T15:02:58.052Z"
+              "WhenOpened": "2025-06-12T15:02:58.052Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "DropZone.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\DropZone.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DropZone.cs",
@@ -156,14 +163,14 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectiveZone.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\ObjectiveZone.cs",
               "RelativeToolTip": "Assets\\Scripts\\ObjectiveZone.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwC0AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAG0AAAAAAAAAAADgv34AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-10T15:09:19.843Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "ConfigController.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\ConfigController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ConfigController.cs",
@@ -175,7 +182,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "CaptureManager.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\CaptureManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\CaptureManager.cs",
@@ -187,20 +194,45 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "NPC.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPC.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPC.cs",
               "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPC.cs",
               "RelativeToolTip": "Assets\\Scripts\\NPC\\NPC.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAApwC8AAAA8AAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAApwC0AAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-02T13:54:22.149Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 4,
+              "Title": "MenuJogo.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\MenuJogo.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
+              "RelativeToolTip": "Assets\\Scripts\\MenuJogo.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAYwCkAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-30T15:53:15.995Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NPCCarControllerNav.cs",
+              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
+              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
+              "RelativeToolTip": "Assets\\Scripts\\NPC\\NPCCarControllerNav.cs",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T16:14:54.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "LevelManager.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\LevelManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\LevelManager.cs",
@@ -212,19 +244,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MenuJogo.cs",
-              "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\MenuJogo.cs",
-              "ToolTip": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\MenuJogo.cs",
-              "RelativeToolTip": "Assets\\Scripts\\MenuJogo.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAA2wCkAAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-30T15:53:15.995Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Catch.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\Catch.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Catch.cs",
@@ -236,7 +256,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "SomAmbienteComDistancia.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\SomAmbienteComDistancia.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SomAmbienteComDistancia.cs",
@@ -248,7 +268,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ControladorSom.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\ControladorSom.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ControladorSom.cs",
@@ -260,7 +280,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "DispararGelados.cs",
               "DocumentMoniker": "C:\\Users\\Alexandre Craveiro\\Desktop\\TDM\\3Ano\\2semestre\\DuckPainDJ\\Assets\\Scripts\\DispararGelados.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DispararGelados.cs",
