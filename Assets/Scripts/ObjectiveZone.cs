@@ -1,8 +1,6 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEditor.Build;
 using UnityEngine.Video;
 
 public class ObjectiveZone : MonoBehaviour
