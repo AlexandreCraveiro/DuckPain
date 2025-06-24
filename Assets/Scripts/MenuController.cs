@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
     VideoPlayer videoPlayer;
     private void Start()
     {
+        Time.timeScale = 1f; // Garante que o tempo do jogo comece normal
         if (videoScreen != null)
         {
             videoPlayer = videoScreen.GetComponent<VideoPlayer>();
